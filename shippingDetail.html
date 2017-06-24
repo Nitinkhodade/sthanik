@@ -1,0 +1,76 @@
+<div class="row address-wrapper" ng-init = "init()">
+    <div ng-if="rc.addressAvailable">
+        <div class="savedAddress">
+            <form class="">
+                <div class="form-group">
+                    <div>{{cc.existingAddress.customerName}}</div>
+                    <div>{{cc.existingAddress.addressLine1}}</div>
+                    <div>{{cc.existingAddress.addressLine2}}</div>
+                    <div>{{cc.existingAddress.pinCode}}</div>
+                    <div>{{cc.existingAddress.city}}</div>
+                    <div>{{cc.existingAddress.state}}</div>
+                    <div>{{cc.existingAddress.country}}</div>
+                </div>
+                <div class="pull-right btn-wrap">
+                    <button type="submit" class="btn btn-primary" ng-click="editAddress()">Edit</button>
+                    <!-- <button type="submit" class="btn btn-primary" ng-click="deliverToExistingAddress()"></button> -->
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="form-section" style=" border: 0; " ng-if="!rc.addressAvailable">
+        <form name="shippingForm" class="shippingForm" novalidate="novalidate">
+            <div class="form-group form-input-group" ng-class="{
+                  'has-error':!shippingForm.addressLine1.$valid && (!shippingForm.addressLine1.$pristine || shippingForm.$submitted),
+                  'has-success':shippingForm.addressLine1.$valid && (!shippingForm.addressLine1.$pristine || shippingForm.$submitted)
+                  }">
+                <input ng-model="address.addressLine1" name="addressLine1" required="required" type="text" class="form-input-field" />
+                <label ng-class="{'filled': address.addressLine1.length}" for="addressLine1" class="control-label">Flat No/House No, Building Name</label>
+                <p ng-show="shippingForm.addressLine1.$error.required && (!shippingForm.addressLine1.$pristine || shippingForm.$submitted )" class="help-block">This is required.</p>
+            </div>
+            <div class="form-group form-input-group" ng-class="{
+                  'has-error':!shippingForm.addressLine2.$valid && (!shippingForm.addressLine2.$pristine || shippingForm.$submitted),
+                  'has-success':shippingForm.addressLine2.$valid && (!shippingForm.addressLine2.$pristine || shippingForm.$submitted)
+                  }">
+                <input ng-model="address.addressLine2" name="addressLine2" required type="text" class="form-input-field" />
+                <label ng-class="{'filled': address.addressLine2.length}" for="addressLine2" class="control-label">Society Name,Street,Area</label>
+                <p ng-show="shippingForm.addressLine2.$error.required && (!shippingForm.addressLine2.$pristine || shippingForm.$submitted )" class="help-block">This is required.</p>
+            </div>
+            <div class="form-group form-input-group" ng-class="{
+                  'has-error':(!shippingForm.pinCode.$valid || shippingForm.pinCode.$error.validateOtp) && (!shippingForm.pinCode.$pristine || shippingForm.$submitted),
+                  'has-success':(shippingForm.pinCode.$valid || !shippingForm.pinCode.$error.validateOtp) && (!shippingForm.pinCode.$pristine || shippingForm.$submitted)
+                  }">
+                <input ng-model="address.pinCode" name="pinCode" required type="text" ng-model-options="{ updateOn: 'blur' }" class="form-input-field" validate-pin/>
+                <label ng-class="{'filled': address.pinCode.length}" for="pinCode" class="control-label">Pincode</label>
+                <div ng-show="shippingForm.pinCode.$dirty || shippingForm.$submitted" class="help-block">
+                    <span ng-show="shippingForm.pinCode.$error.required">Please understand us, PIN is required</span>
+                    <span ng-show="shippingForm.pinCode.$error.not_a_number">I was thinking PIN is a number!!</span>
+                    <span ng-show="shippingForm.pinCode.$error.not_six_digits">Enter a valid pincode number</span>
+                </div>
+            </div>
+            <div class="form-group form-custom-dropdown" ng-class="{
+                'has-error': shippingForm.$submitted && !shippingForm.city.$valid,
+                'has-success': shippingForm.$submitted && shippingForm.city.$valid
+            }">
+                <city-combobox name="city" class="form-input-field" ng-model="address.city" form-field-name="shippingForm.city" required="true" show-home-icon='false'></city-combobox>
+                <!-- <input type="text" id="address.city" name="city" class="form-input-field" ng-model="address.city" required> -->
+                <!-- <label for="city" class="control-label">City</label> -->
+                <p ng-show="!shippingForm.city.$valid && shippingForm.$submitted" class="help-block">City Name is required.</p>
+            </div>
+            <div class="form-group form-custom-dropdown" ng-class="{
+                'has-error': shippingForm.$submitted && !shippingForm.state.$valid,
+                'has-success': shippingForm.$submitted && shippingForm.state.$valid
+            }">
+                <state-combobox name="state" class="form-input-field" ng-model="address.state" form-field-name="shippingForm.state" required="true"></state-combobox>
+                <!-- <input type="text" id="state" name="state" class="form-input-field" ng-model="address.state" required>
+                <label for="state" class="control-label">State</label> -->
+                <p ng-show="!shippingForm.state.$valid && shippingForm.$submitted" class="help-block">State Name is required.</p>
+            </div>
+            <div class="form-group form-input-group pull-right">
+                <button type="button" class="btn btn-default" ng-if="updateFlag == true" ng-click="cancelUpdate()">cancel</button>
+                <button type="button" class="btn btn-primary" ng-click="updateAddress(address,shippingForm.$valid)">Save Address</button>
+            </div>
+        </form>
+    </div>
+</div>

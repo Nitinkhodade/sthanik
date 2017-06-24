@@ -1,0 +1,27 @@
+<div class="contactUs-wrapper sthanik-page" ng-controller="serviceSuccessCtrl" ng-init="init()">
+    <div class="container">
+        <div class="row">
+            <div class="board">
+                <div class="board-inner-head">
+                    <div class="title">
+                        <h1>Order Status</h1>
+                    </div>
+                </div>
+                <div class="tab-content">
+                    <div class="form-group">
+					             <h3>Yayyy!! Order has been placed successfully!! </h3>
+					             <h3> Your order id is: {{prePayData.transactionId}}</h3>
+                    </div>
+			         <div class="form-group" ng-if="isPrePay">
+			             <p>Make a note of payment refrence number: {{prePayData.paymentId}}</p>
+			         </div>
+			         <div class="form-group">
+			             <div>Your order is on its way. check <a href="/orderHistory"> order status</a></div>
+			             <p>While we are working on preparing your order for delivery, you can reach out to us via email at customercare@sthanik.com or phone {{prePayData.contactNumber}}. Please use above Order Id in all communications to help us serve you better.</p>
+			         </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

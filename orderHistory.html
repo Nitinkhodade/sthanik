@@ -1,0 +1,121 @@
+<div class="orderHistory-wrapper sthanik-page" ng-controller="orderHistoryCtrl" ng-init='init()'>
+    <div class="container">
+        <div class="row">
+
+            <div class="board">
+                <div class="board-inner-head">
+                    <div class="title">
+                        <label>Your Order History</label>
+                    </div>
+                </div>
+
+                <div class="tab-content">
+                    <spinner flag="orderHistoryLoading"></spinner>
+
+                    <div class="text-right btn-wrapper">
+                        <a href="/shop/s/" type="button" class="btn btn-primary">Go for Shopping</a>
+
+                        <!-- li>
+                       <input type="file" file-model="myFile"/>
+                        <button ng-click="uploadFile()">upload me</button>
+                    </li-->
+                    </div>
+
+                    <div class="listview">
+                        <div class="item-list-card" ng-repeat="orderDtls in orderHistory" ng-init="orderDtls.showItems=false;">
+                            <div class="thumbnail item-card">
+                                <div class="progress">
+                                    <div ng-repeat="status in orderDtls.statusHistory" class="progress-bar progress-bar-{{status.orderStatus}}"
+                                         title="Status changed at {{status.orderDate  | date:'dd/MM/yyyy, hh:mm:ss a'}}">
+                                        {{status.orderStatus}}
+                                    </div>
+                                </div>
+                                <div class="item-wrapper">
+                                    <div class="col-xs-5 col-md-5">
+                                        <ul class="nav nav-pills nav-stacked">
+                                            <li>Order #: <strong>{{orderDtls.orderId}}</strong></li>
+                                            <li>Shop: {{orderDtls.vendorName}}</li>
+                                            <li ng-show="orderDtls.grandTotal > 0">Order Total: Rs. {{orderDtls.grandTotal}}</li>
+                                            <li ng-show="orderDtls.grandTotal <= 0">Order Total: Rs. To Be Decided on Inspection</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-xs-5 col-md-5">
+                                        <ul class="nav nav-pills nav-stacked">
+                                            <li>Status: <strong>{{orderDtls.orderStatus}}</strong></li>
+                                            <li>Ordered on: {{orderDtls.statusHistory[0].orderDate | date:'dd/MM/yyyy, hh:mm:ss a'}}</li>
+                                            <li>Deliver to: {{orderDtls.addressLine1}} {{orderDtls.addressLine2}} {{orderDtls.city}} {{orderDtls.pinCode}}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4 col-md-4 pull-right">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default" ng-click="orderDtls.showItems=!orderDtls.showItems">
+                                            <text ng-if="!orderDtls.showItems">Show Item Details</text>
+                                            <text ng-if="orderDtls.showItems">Hide Item Details</text>
+                                        </button>
+                                        <button class="btn btn-default" ng-if="rc.canCancel(orderDtls.orderStatus)" ng-click="updateOrder(orderDtls)" type="button" >Cancel Order</button>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="orderDetails" ng-if="orderDtls.showItems">
+                                    <form>
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Item Name</th>
+                                                    <th>Price</th>
+                                                    <th>Unit</th>
+                                                    <th>Quantity</th>
+                                                    <th>Total Price</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr alt="Please click here to see more" ng-repeat="orderItems in orderDtls.orderItems">
+                                                    <td>{{orderItems.productName}}</td>
+                                                    <td>{{orderItems.itemPrice}}</td>
+                                                    <td>{{orderItems.itemUnit}}</td>
+                                                    <td>{{orderItems.itemQuantity}}</td>
+                                                    <td>{{orderItems.itemTotalPrice}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>Total Order</td>
+                                                    <td>Rs. {{orderDtls.orderTotal}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>Delivery Charges</td>
+                                                    <td>{{orderDtls.deliveryCharges}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>Discount</td>
+                                                    <td>{{orderDtls.discount}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>
+                                                        <strong >{{orderDtls.amountLabel}}</strong>
+                                                    </td>
+                                                    <td><strong>Rs. {{orderDtls.grandTotal}}</strong></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

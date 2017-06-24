@@ -1,0 +1,52 @@
+<div class="sthanikTplPage-wrapper" ng-controller="buyersCtrl" ng-init="init()">
+    <div class="sthanik-page">
+        <div class="board">
+            <div class="board-inner-head">
+                Buyers
+            </div>
+            <div class="tab-content">
+                <!-- contents of the page -->
+                <form name="searchPayout" class="searchPayoutForm">
+                    <div class="searchFields col-sm-9">
+                        <div class="searchField col-sm-6">
+                            <div class="lbl">Location </div>
+                            <input class="field" type="text" ng-model="dtls.location" placeholder="Enter location" id="location">
+                        </div>
+
+                    </div>
+                    <div class="search-btn col-sm-3">
+                        <button type="submit" class="btn btn-primary" ng-click="search(dtls)">Search</button>
+                    </div>
+                </form>
+                <div class="listview">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Buyer id</th>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="vendor in vendorList">
+                            <td>{{vendor.vendorId}}</td>
+                            <td>{{vendor.name}}</td>
+                            <td>{{vendor.address.addressLine1}} {{vendor.address.addressLine2}}</td>
+                            <td>{{vendor.email}}</td>
+                            <td>{{vendor.mobile}}</td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="clearfix">
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

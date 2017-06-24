@@ -1,0 +1,136 @@
+<div class="sthanikTplPage-wrapper" ng-controller="searchPayoutCtrl" ng-init="init()">
+    <div class="sthanik-page">
+        <div class="board">
+            <div class="tab-content">
+                <!-- contents of the page -->
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h4>Search Payout</h4></div>
+                    <form name="searchPayout" class="searchPayoutForm">
+                        <div class="searchFields col-sm-10">
+                            <div class="searchField vendor-dropdown-wrap col-sm-5">
+                                <label>Vendor: </label>&nbsp;
+                                <select ng-model="dtls.vendorId" ng-options="vendor.vendorId as vendor.name for vendor in vendorList" class="vendor-dropdown field">
+                                    <option value="">Select vendor</option>
+                                </select>
+                            </div>
+                            <div class="searchField vendor-dropdown-wrap col-sm-5">
+                                <label>Accounting Period: </label>&nbsp;
+                                <select ng-model="dtls.accountingPeriod"
+                                        ng-options="accountingPeriod as ( 'From ' + (accountingPeriod.dateStart | date:'dd-MMM-yyyy') + ' To ' + (accountingPeriod.dateEnd | date:'dd-MMM-yyyy')) for accountingPeriod in accountingPeriods" class="vendor-dropdown field">
+                                    <option value="">Select period</option>
+                                </select>
+                            </div>
+                            <div class="searchField col-sm-5">
+                                <label>Payout Id: </label>&nbsp;
+                                <input class="field" type="text" ng-model="dtls.payoutId" placeholder="Enter payout id" id="payoutId">
+                            </div>
+                            <div class="searchField col-sm-5">
+                                <label>Payout Status: </label>&nbsp;
+                                <select ng-model="dtls.payoutStatus" class="vendor-dropdown field">
+                                    <option value="">All</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="complete">Complete</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="search-btn col-sm-3">
+                            <button type="submit" class="btn btn-primary" ng-click="search(dtls)">Search</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="listview" ng-if="showResults" ng-init="showResults = false">
+                    <div class="panel panel-default">
+                        <!-- Default panel contents -->
+                        <div class="panel-heading"><h4>Payout List</h4></div>
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Payout id</th>
+                                <th>Accounting Period</th>
+                                <th>Order total</th>
+                                <th>COD</th>
+                                <th>Paid Online</th>
+                                <th>Discount</th>
+                                <th>Service Charge</th>
+                                <th>Status</th>
+                                <th>Created by</th>
+                                <th>Create date</th>
+                                <th>Amount payable</th>
+                                <th>Payout Remarks</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="payout in payoutList">
+                                <td>{{payout.payoutId}}</td>
+                                <td>From {{payout.fromDate | date:'dd-MMM-yyyy'}} To {{payout.toDate | date:'dd-MMM-yyyy'}}</td>
+                                <td>{{payout.orderTotal}}</td>
+                                <td>{{payout.cod}}</td>
+                                <td>{{payout.paidOnline}}</td>
+                                <td>{{payout.discount}}</td>
+                                <td>{{payout.vendorServiceCharge}}</td>
+                                <td>{{payout.payoutStatus}}</td>
+                                <td>{{payout.createdBy}} </td>
+                                <td>{{payout.createDate | date:'dd/MM/yyyy, hh:mm:ss a'}} </td>
+                                <th>{{payout.amountPayable}}</td>
+                                <th>{{payout.payoutRemarks}}</td>
+                                <td>
+                                    <a href="#" ng-click="fetchDetails(payout.payoutId)" title="View details"><span class="glyphicon glyphicon-zoom-in"></span></a>
+                                    <a href="#" ng-if="payout.payoutStatus === 'pending' && rc.isSuperAdmin()" ng-click="updatePayout(payout,'approved')" title="Approve Payout"><span class="glyphicon glyphicon-edit"></span></a>
+                                    <a href="#" ng-if="payout.payoutStatus === 'approved'" ng-click="updatePayout(payout,'complete')" title="Update payout details"><span class="glyphicon glyphicon-edit"></span></a>
+                                    <a href="#" ng-if="payout.payoutStatus === 'approved'" ng-click="printPayout(payout)" title="Print payout"><span class="glyphicon glyphicon-print"></span></a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="clearfix">
+                </div>
+
+                <!-- payout details: information on orders processed under payout -->
+                <div class="orderDetails" ng-if="showDetails">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><h4>Orders processed under Payout Id: {{showDetailsPayoutId}}</h4></div>
+                        <form>
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Order Id</th>
+                                    <th>Customer name</th>
+                                    <th>Order date</th>
+                                    <th>Delivery date</th>
+                                    <th>Order total</th>
+                                    <th>Delivery charges</th>
+                                    <th>discount</th>
+                                    <th>Grand total</th>
+                                    <th>Pay mode</th>
+                                    <th>Vendor Service charge</th>
+                                    <th>Amount Adjusted</th>
+                                    <th>Amount payable to vendor</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr alt="Please click here to see more" ng-repeat="order in payoutDetails">
+                                    <td>{{order.orderId}}</td>
+                                    <td>{{order.custName}}</td>
+                                    <td>{{order.orderDate | date:'dd/MM/yyyy, hh:mm:ss a'}}</td>
+                                    <td>{{order.deliveryDate | date:'dd/MM/yyyy, hh:mm:ss a'}}</td>
+                                    <td>{{order.orderTotal}}</td>
+                                    <td>{{order.deliveryCharges}}</td>
+                                    <td>{{order.discount}}</td>
+                                    <td>{{order.grandTotal}}</td>
+                                    <td>{{order.payMode}}</td>
+                                    <td>{{order.vendorServiceCharge}}</td>
+                                    <td>{{order.amountAdjusted}}</td>
+                                    <td>{{order.amountPayable}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

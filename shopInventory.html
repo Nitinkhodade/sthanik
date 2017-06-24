@@ -1,0 +1,45 @@
+<div class="shopInventory-wrapper sthanik-page" ng-controller="shopInventoryCtrl" ng-init='init()'>
+    <div class="container">
+        <div class="row">
+            <div class="board">
+                <div class="board-inner-head">
+                    <div class="title">
+                        <label>Shop Inventory</label>
+                    </div>
+                </div>
+                <div class="tab-content">
+                    <div class="col-xs-6 col-sm-3 col-md-2" ng-repeat="product in shopInventory">
+                        <div class="thumbnail item-card">
+                            <img class="item-image" ng-lazy-src="{{product.imageUrl}}" alt="{{product.itemName}}" err-img>
+                            <div class="item-image no-img">
+                                <div class="noImageTemplate">
+                                    <span class="glyphicon glyphicon-camera"></span>
+                                    <div> No Image </div>
+                                </div>
+                            </div>
+                            <div class="caption">
+                                <div class="item-title">
+                                    {{product.itemName}}
+                                </div>
+                                <div class="item-info">
+                                    <div class="item-availin pull-left">
+                                        <select class="availin-dropdown" name="mySelect" id="mySelect" ng-init="selectedOption=product.shopOptions[0]" ng-options="option.optionValue+option.optionUnit for option in product.shopOptions track by option.optionId"
+                                            ng-model="selectedOption"></select>
+                                    </div>
+                                    <div class="item-price-wrapper pull-right">
+                                        <div class="item-price">Rs. </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="list-inline text-center btn-wrapper">
+                        <li>
+                            <a href="" type="button" class="btn btn-primary">Update</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>

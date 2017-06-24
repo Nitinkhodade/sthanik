@@ -1,0 +1,214 @@
+<div class="vendorRegistration-wrapper sthanik-page" ng-controller="vendorRegCtrl as vrc">
+    <div class="container">
+        <div class="row">
+            <div class="board">
+                <div class="board-inner-head">
+                    <div class="title">
+                        <h1>Vendor Registration</h1>
+                    </div>
+                </div>
+                <div class="tab-content">
+                    <div class='hidden-xs hidden-sm col-md-6 col-lg-6'>
+                        <div class="decorator-container">
+                            <div id="decorator" class="decorative-step">
+                                <img class="decorate-img" src="../common/images/venderSignup/register.png" alt="" />
+                                <div class="decorator-desc">
+                                    Register with us
+                                </div>
+                            </div>
+                            <div id="decorator" class="decorative-step">
+                                <img class="decorate-img" src="../common/images/venderSignup/List.png" alt="" />
+                                <div class="decorator-desc">
+                                    List items you sell
+                                </div>
+                            </div>
+                            <div id="decorator" class="decorative-step">
+                                <img class="decorate-img" src="../common/images/venderSignup/mobile-notification.png" alt="" />
+                                <div class="decorator-desc">
+                                    Install app and get notification on new order
+                                </div>
+                            </div>
+                            <div id="decorator" class="decorative-step">
+                                <img class="decorate-img" src="../common/images/venderSignup/delivery.png" alt="" />
+                                <div class="decorator-desc">
+                                    Deliver items to User.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='form-section vendor-signup col-md-6 col-lg-6'>
+                        <form name="newVendorForm" ng-submit="submitVendorDetails(newVendor,newVendorForm.$valid)" novalidate>
+                            <div class="form-group form-input-group" ng-class="{
+'has-error': (newVendorForm.shopName.$dirty || newVendorForm.$submitted) && !newVendorForm.shopName.$valid,
+'has-success': (newVendorForm.shopName.$dirty || newVendorForm.$submitted) && newVendorForm.shopName.$valid
+}">
+                                <input type="text" id="shopName" name="shopName" class="form-input-field" ng-model="newVendor.shopName" required>
+                                <label for="shopName" class="control-label">Shop Name</label>
+                                <p ng-show="newVendorForm.shopName.$error.required && (newVendorForm.shopName.$dirty || newVendorForm.$submitted)" class="help-block">Shop Name is required.</p>
+                            </div>
+                            <div class="form-group form-input-group" ng-class="{
+'has-error': (newVendorForm.propName.$dirty || newVendorForm.$submitted) && !newVendorForm.propName.$valid,
+'has-success': (newVendorForm.propName.$dirty || newVendorForm.$submitted) && newVendorForm.propName.$valid
+}">
+                                <input type="text" id="propName" name="propName" class="form-input-field" ng-model="newVendor.propName" required>
+                                <label for="propName" class="control-label">Proprietor Name</label>
+                                <p ng-show="newVendorForm.propName.$error.required && (newVendorForm.propName.$dirty || newVendorForm.$submitted)" class="help-block">Proprietor Name is required.</p>
+                            </div>
+                            <div class="form-group form-custom-dropdown" ng-class="{
+'has-error': !newVendorForm.vendorType.$valid && newVendorForm.$submitted,
+'has-success': newVendorForm.vendorType.$valid && newVendorForm.$submitted
+}">
+                                <store-type-combobox name="vendorType" class="form-input-field" ng-model="newVendor.vendorType" form-field-name="newVendorForm.vendorType" required="true"></store-type-combobox>
+                                <!-- <input type="text" id="vendorType" name="vendorType" class="form-input-field" ng-model="newVendor.vendorType" required>
+                                <label for="vendorType" class="control-label">Shop Type</label> -->
+                                <p ng-show="!newVendorForm.vendorType.$valid && newVendorForm.$submitted" class="help-block">Shop Type is required.</p>
+                            </div>
+                            <div class="form-group form-input-group" ng-class="{
+'has-error': (newVendorForm.address.addressLine1.$dirty || newVendorForm.$submitted) && !newVendorForm.address.addressLine1.$valid,
+'has-success': (newVendorForm.address.addressLine1.$dirty || newVendorForm.$submitted) && newVendorForm.address.addressLine1.$valid
+}">
+                                <input type="text" id="addressLine1" name="addressLine1" class="form-input-field" ng-model="newVendor.addressLine1" required>
+                                <label for="addressLine1" class="control-label">Address Line No 1</label>
+                                <p ng-show="newVendorForm.addressLine1.$error.required && (newVendorForm.addressLine1.$dirty || newVendorForm.$submitted)" class="help-block">Address Line 1 is required.</p>
+                            </div>
+                            <div class="form-group form-input-group" ng-class="{
+'has-error': (newVendorForm.addressLine2.$dirty || newVendorForm.$submitted) && !newVendorForm.addressLine2.$valid,
+'has-success': (newVendorForm.addressLine2.$dirty || newVendorForm.$submitted) && newVendorForm.addressLine2.$valid
+}">
+                                <input type="text" id="addressLine2" name="addressLine2" class="form-input-field" ng-model="newVendor.addressLine2" required>
+                                <label for="addressLine2" class="control-label">Address Line No 2</label>
+                                <p ng-show="newVendorForm.addressLine2.$error.required && (newVendorForm.addressLine2.$dirty || newVendorForm.$submitted)" class="help-block">Address Line 2 is required.</p>
+                            </div>
+                            <div class="form-group form-custom-dropdown" ng-class="{
+                                'has-error': newVendorForm.$submitted && !newVendorForm.state.$valid,
+                                'has-success': newVendorForm.$submitted && newVendorForm.state.$valid
+                            }">
+                                <state-combobox name="state" class="form-input-field" ng-model="newVendor.state" form-field-name="newVendorForm.state" required="true"></state-combobox>
+                                <!-- <input type="text" id="state" name="state" class="form-input-field" ng-model="newVendor.state" required>
+                                <label for="state" class="control-label">State</label> -->
+                                <p ng-show="!newVendorForm.state.$valid && newVendorForm.$submitted" class="help-block">State Name is required.</p>
+                            </div>
+
+                            <div class="form-group form-custom-dropdown" ng-class="{
+'has-error': newVendorForm.$submitted && !newVendorForm.city.$valid,
+'has-success': newVendorForm.$submitted && newVendorForm.city.$valid
+}">
+                                <md-autocomplete flex required md-input-name="city" md-min-length="0" md-selected-item="vrc.city" md-search-text="vrc.citySearchText" md-items="city in vrc.cityQuerySearch(vrc.citySearchText)" md-item-text="city" md-require-match md-floating-label="Select City"
+                                    md-selected-item-change="vrc.onCitySelected()">
+                                    <md-item-template>
+                                        <span md-highlight-text="vrc.citySearchText">{{city}}</span>
+                                    </md-item-template>
+                                    <p ng-show="!newVendorForm.city.$valid && newVendorForm.$submitted" class="error-msg">City Name is required.</p>
+                                </md-autocomplete>
+                                <!-- <city-combobox name="city" class="form-input-field" ng-model="newVendor.city" form-field-name="newVendorForm.city" required="true" show-home-icon='false'></city-combobox>
+                                <p ng-show="!newVendorForm.city.$valid && newVendorForm.$submitted" class="help-block">City Name is required.</p> -->
+                            </div>
+
+
+                            <div class="form-group form-input-group" ng-class="{
+'has-error': (newVendorForm.area.$dirty || newVendorForm.$submitted) && !newVendorForm.area.$valid,
+'has-success': (newVendorForm.area.$dirty || newVendorForm.$submitted) && newVendorForm.area.$valid
+}">
+                                <!-- <input type="text" id="area" name="area" class="form-input-field" ng-model="newVendor.area" required>
+                                <label for="area" class="control-label">Area</label>
+                                <p ng-show="newVendorForm.area.$error.required && (newVendorForm.area.$dirty || newVendorForm.$submitted)" class="help-block">Area is required.</p> -->
+                                <md-autocomplete flex required md-input-name="area" md-min-length="0" md-selected-item="vrc.areaObj" md-search-text="vrc.areaSearchText" md-items="areaObj in vrc.areaQuerySearch(vrc.areaSearchText)" md-item-text="areaObj.areaName" md-require-match md-floating-label="Select Area"
+                                    md-selected-item-change="vrc.onAreaSelected()">
+                                    <md-item-template>
+                                        <span md-highlight-text="vrc.areaSearchText">{{areaObj.areaName}}</span>
+                                    </md-item-template>
+                                    <p ng-show="!newVendorForm.area.$valid && newVendorForm.$submitted" class="error-msg">Area is required.</p>
+                                </md-autocomplete>
+                            </div>
+
+                            <div class="form-group form-input-group" ng-class="{
+'has-error': (newVendorForm.area.$dirty || newVendorForm.$submitted) && !newVendorForm.area.$valid,
+'has-success': (newVendorForm.area.$dirty || newVendorForm.$submitted) && newVendorForm.area.$valid
+}">
+                                <!-- <input type="text" id="area" name="area" class="form-input-field" ng-model="newVendor.area" required>
+                                <label for="area" class="control-label">Area</label>
+                                <p ng-show="newVendorForm.area.$error.required && (newVendorForm.area.$dirty || newVendorForm.$submitted)" class="help-block">Area is required.</p> -->
+                                <md-autocomplete flex required md-input-name="subAr md-min-length="0"ea" md-selected-item="vrc.subArea" md-search-text="vrc.subAreaSearchText" md-items="subArea in vrc.subAreaQuerySearch(vrc.subAreaSearchText)" md-item-text="subArea" md-require-match md-floating-label="Select Sub Area"
+                                    md-selected-item-change="vrc.onSubAreaSelected()">
+                                    <md-item-template>
+                                        <span md-highlight-text="vrc.subAreaSearchText">{{subArea}}</span>
+                                    </md-item-template>
+                                    <!-- <div class="error-msg" ng-messages="newVendorForm.subArea.$error" ng-if="(newVendorForm.subArea.$dirty || newVendorForm.$submitted) && !newVendorForm.subArea.$valid">
+                                        <div ng-message="required">You <b>must</b> select sub-area</div>
+                                    </div> -->
+                                </md-autocomplete>
+                            </div>
+
+                            <div class="form-group form-custom-dropdown" ng-class="{
+'has-error': !newVendorForm.businessType.$valid && newVendorForm.$submitted,
+'has-success': newVendorForm.businessType.$valid && newVendorForm.$submitted
+}">
+                                <vendor-business-type-combobox name="businessType" class="form-input-field" ng-model="newVendor.businessType" form-field-name="newVendorForm.businessType" required="true"></vendor-business-type-combobox>
+                                <p ng-show="!newVendorForm.businessType.$valid && newVendorForm.$submitted" class="help-block">Business Type is required.</p>
+                            </div>
+
+
+                            <div class="form-group form-input-group" ng-class="{
+'has-error': (newVendorForm.pincode.$dirty || newVendorForm.$submitted) && !newVendorForm.pincode.$valid,
+'has-success': (newVendorForm.pincode.$dirty || newVendorForm.$submitted) && newVendorForm.pincode.$valid
+}">
+                                <input type="number" id="pincode" name="pincode" class="form-input-field" ng-model="newVendor.pincode" required>
+                                <label for="pincode" class="control-label">Pincode</label>
+                                <p ng-show="newVendorForm.pincode.$error.required && (newVendorForm.pincode.$dirty || newVendorForm.$submitted)" class="help-block">Pincode is required.</p>
+                            </div>
+
+                            <div class="form-group form-input-group" ng-class="{
+'has-error': (newVendorForm.email.$dirty || newVendorForm.$submitted) && !newVendorForm.email.$valid,
+'has-success': (newVendorForm.email.$dirty || newVendorForm.$submitted) && newVendorForm.email.$valid
+}">
+                                <input type="text" apikey="vendor" id="email" name="email" class="form-input-field" ng-model="newVendor.email" ng-model-options="{ updateOn: 'blur' }" required validate-email>
+                                <label for="email" class="control-label">Email</label>
+                                <div ng-show="newVendorForm.email.$dirty || newVendorForm.$submitted" class="help-block">
+                                    <span ng-show="newVendorForm.email.$error.required">Email is required.</span>
+                                    <span ng-show="newVendorForm.email.$error.not_valid_format">Enter valid email id format</span>
+                                    <span ng-show="newVendorForm.email.$error.email_registered_already">Email registered already, Try forgot password</span>
+                                </div>
+                            </div>
+                            <div class="form-group form-input-group" ng-class="{
+'has-error': (newVendorForm.mobile.$dirty || newVendorForm.$submitted) && !newVendorForm.mobile.$valid,
+'has-success': (newVendorForm.mobile.$dirty || newVendorForm.$submitted) && newVendorForm.mobile.$valid
+}">
+                                <input type="number" apikey="vendor" id="mobile" name="mobile" class="form-input-field" ng-model="newVendor.mobile" ng-model-options="{ updateOn: 'blur' }" required validate-mobile>
+                                <label for="mobile" class="control-label">Mobile</label>
+                                <div ng-show="newVendorForm.mobile.$dirty || newVendorForm.$submitted" class="help-block">
+                                    <span ng-show="newVendorForm.mobile.$error.required">Mobile is required.</span>
+                                    <span ng-show="newVendorForm.mobile.$error.not_ten_digits">Enter valid Mobile number</span>
+                                    <span ng-show="newVendorForm.mobile.$error.num_registered">Mobile number registered already</span>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-if="rc.showOTP && !newVendorForm.mobile.$error.validateMobile" ng-class="{
+              'has-error':!newVendorForm.otp.$valid && (newVendorForm.otp.$dirty || newVendorForm.$submitted),
+              'has-success':newVendorForm.otp.$valid && (newVendorForm.otp.$dirty || newVendorForm.$submitted)
+          }">
+                                <label for="otp" class="control-label">Enter OTP recevied on your mobile:
+                                    <input type="number" id="otp" name="otp" class="form-control" ng-model="newVendor.otp" placeholder="OTP" ng-model-options="{ updateOn: 'blur' }" required validate-otp>
+                                    <p style=" margin: 0; " ng-show="newVendorForm.otp.$error.required && (newVendorForm.otp.$dirty || newVendorForm.$submitted)" class="help-block">OTP is required.</p>
+                                    <p style=" margin: 0; " ng-show="newVendorForm.otp.$error.validateOtp" class="help-block">Invalid OTP!! Please try other</p>
+                                </label>
+                                <!-- <p ng-show="newVendorForm.otp.$error.required && (newVendorForm.otp.$dirty || newVendorForm.$submitted )" class="help-block">OTP is required.</p> -->
+                            </div>
+                            <div class="form-group form-input-group" ng-class="{
+'has-error': (newVendorForm.passwd.$dirty || newVendorForm.$submitted) && !newVendorForm.passwd.$valid,
+'has-success': (newVendorForm.passwd.$dirty || newVendorForm.$submitted) && newVendorForm.passwd.$valid
+}">
+                                <input type="password" id="passwd" name="passwd" class="form-input-field" ng-model="newVendor.passwd" required>
+                                <label for="firstName" class="control-label">Password</label>
+                                <p ng-show="newVendorForm.passwd.$error.required && (newVendorForm.passwd.$dirty || newVendorForm.$submitted)" class="help-block">Password is required.</p>
+                            </div>
+                            <div class="form-group form-input-group pull-right btn-wrapper">
+                                <button type="submit" class="btn btn-primary">Register</button>
+                            </div>
+                            <div class="clearfix"> </div>
+                        </form>
+                    </div>
+                    <div class='clearfix'></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
