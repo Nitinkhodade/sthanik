@@ -1,0 +1,174 @@
+.orderWrapper {
+    text-align: center; 
+    background-color: #F4F6F6;
+    }
+
+	.orderWrapper .title h{
+      font-size:14px;
+	  font-style: oblique;
+	}
+	
+	.orderWrapper .title  p{
+  
+     font-weight: bold;
+	 font-size: 13px;
+	 font-style: oblique;
+	 
+    }
+	.orderWrapper .title  p1{
+  
+    
+	 font-size: 12px;
+	 font-weight: normal;
+	 font-style: oblique;
+    }
+    .orderWrapper .title h3{
+      color: #E04904;
+      font-size:21px;
+	  font-weight: bold;
+	  font-style: oblique;
+      	
+    }
+	   
+    .orderWrapper .title-box  {
+       
+       text-align: center; 
+	}	   
+	   
+    .orderWrapper .title-box  h3{	
+          font-size:15px;
+	      font-weight: bold;
+          text-align: left;
+           font-style: oblique;		  
+    }
+		 
+    .orderWrapper .title-box  h4{	
+          font-size:8px;
+	      font-weight: bold;
+          text-align: center;
+           font-style: oblique;		  
+        
+	     }
+		 
+		 
+ .orderWrapper .list-inline {
+           
+		   font-size:12px;
+         }
+.orderWrapper .list-unstyled {
+	 
+       font-weight: normal;
+	   font-size: 12px;
+       text-align: left;
+       max-width : 100%;	
+          
+	   }
+	   .orderWrapper .list {
+	   
+	    font-weight: bold;
+		font-size: 13px;
+		text-align: left;
+	  
+	  }
+	  
+.orderWrapper .table-responsive {
+        text-align: center; 
+		font-size:13px;
+		width:325px;
+		padding:3px;
+      }	
+    .btn {
+     border: none; /* Remove borders */
+	 color: white; /* Add a text color */
+     padding: 12px 26px; /* Add some padding */
+     cursor: pointer; /* Add a pointer cursor on mouse-over */
+     font-size:12px;
+	 background-color: #2196F3;
+     }
+	 
+   
+.board .nav-tabs {
+    position: relative;
+    /* border-bottom: 0; */
+     width: 75%; 
+    margin: 40px auto;
+    margin-bottom: 0;
+    box-sizing: border-box;
+
+   }
+   
+	.board > div.board-inner{
+    background: #fafafa url(http://subtlepatterns.com/patterns/geometry2.png);
+    background-size: 30%;
+    }
+	 
+	.liner{
+    height: 3px;
+    background: #ddd;
+    position: absolute;
+    width: 80%;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: 60px;
+	bottom: 50px;
+    z-index: 1;
+   }
+
+   span.round-tabs{
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+    display: inline-block;
+    border-radius: 40px;
+    background: white;
+    z-index: 2;
+    position: absolute;
+    left: 0;
+    text-align: center;
+    font-size: 20px;
+    }
+	
+    span.round-tabs.active{
+	 
+    color:  rgb(26, 229, 11);
+	border: 1px solid  rgb(26, 229, 11);
+    }
+
+    li.active span.round-tabs.active{
+     
+    background: #fff !important;
+    border: 1px solid 0066ff;
+    color: rgb(26, 229, 11);
+    }
+
+    span.round-tabs.inactive{
+     
+    color: #999;
+	border: 1px solid #999;
+    }
+
+    li.active span.round-tabs.inactive{
+    background: #fff !important;
+    border: 1px solid #ddd;
+    color: #0066ff;
+   }
+
+
+   .nav-tabs > li {
+    width: 25%;
+    }
+
+   .nav-tabs > li a{
+   width: 70px;
+   height: 70px;
+   margin: 20px auto;
+   border-radius: 100%;
+   padding: 0;
+   }
+
+  .nav-tabs > li a:hover{
+    background: transparent;
+   }
+
+/*# sourceMappingURL=completeOrder.css.map */

@@ -1,0 +1,17 @@
+.savedAddress {
+  width: 300px;
+  margin: 0 auto;
+  border: 1px solid #D1D1D7;
+  padding: 15px;
+  -webkit-box-shadow: 0 0 5px #D1D1D7;
+  -moz-box-shadow: 0 0 5px #D1D1D7;
+  box-shadow: 0 0 5px #D1D1D7;
+  cursor: pointer; }
+  .savedAddress .btn-wrap {
+    margin-top: -30px; }
+
+.shippingForm {
+  width: 80%;
+  margin: 0 auto; }
+
+/*# sourceMappingURL=shippingDetails.css.map */

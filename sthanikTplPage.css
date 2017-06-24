@@ -1,0 +1,29 @@
+.sthanik-page {
+  background: url(../images/sthanik-background.jpg);
+  padding-bottom: 8rem; }
+  .sthanik-page .board {
+    min-height: 200px;
+    border: 1px solid #999;
+    padding: 3rem;
+    background: #fff;
+    box-shadow: 10px 10px #ccc,-10px 20px #ddd;
+    -webkit-box-shadow: 10px 10px #ccc,-10px 20px #ddd;
+    -moz-box-shadow: 10px 10px #ccc,-10px 20px #ddd; }
+    .sthanik-page .board .board-inner-head {
+      width: 90%;
+      margin: auto;
+      text-align: center;
+      border-bottom: 1px solid #cccccc;
+      font-size: 4rem; }
+    .sthanik-page .board .tab-content {
+      position: relative;
+      min-height: 30rem;
+      margin-top: 4rem; }
+      .sthanik-page .board .tab-content .btn-wrapper {
+        margin: 3.5rem 0; }
+      .sthanik-page .board .tab-content .form-section {
+        border: 1px solid #b7b7b7;
+        border-radius: 10px;
+        padding: 5rem; }
+
+/*# sourceMappingURL=sthanikTplPage.css.map */

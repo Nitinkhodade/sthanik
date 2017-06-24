@@ -1,0 +1,164 @@
+/**** Hide nav-search on nav-bar ****/
+#landing-page.root-wrapper .top-view {
+  margin: 0; }
+
+#landing-page .offer-wrapper {
+  display: block; }
+
+/*** Homepage styles ****/
+.landing-wrapper .intro-header {
+  text-align: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative; }
+  .landing-wrapper .intro-header .background-overly {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: -webkit-linear-gradient(270deg, #fff 0, #fff 10%, rgba(255, 255, 255, 0.75) 40%, rgba(255, 255, 255, 0.4) 100%);
+    background: -webkit-linear-gradient(top, #fff 0, #fff 10%, rgba(255, 255, 255, 0.75) 40%, rgba(255, 255, 255, 0.4) 100%);
+    background: linear-gradient(180deg, #fff 0%, #fff 10%, rgba(255, 255, 255, 0.75) 40%, rgba(255, 255, 255, 0.4) 100%); }
+  .landing-wrapper .intro-header .searchBoxWrapper {
+    position: relative; }
+    .landing-wrapper .intro-header .searchBoxWrapper .setlocation {
+      color: #4D95D6; }
+      @media (max-width: 470px) {
+        .landing-wrapper .intro-header .searchBoxWrapper .setlocation {
+          width: 100%; }
+          .landing-wrapper .intro-header .searchBoxWrapper .setlocation .for-mobile {
+            display: table;
+            width: 100%;
+            margin: 5px 0; }
+          .landing-wrapper .intro-header .searchBoxWrapper .setlocation .landing_dropdown button.btn,
+          .landing-wrapper .intro-header .searchBoxWrapper .setlocation .landing_dropdown .dropdown-menu {
+            width: 100%; } }
+      .landing-wrapper .intro-header .searchBoxWrapper .setlocation .form-control.searchAreaBar,
+      .landing-wrapper .intro-header .searchBoxWrapper .setlocation .btn {
+        height: 6rem; }
+      .landing-wrapper .intro-header .searchBoxWrapper .setlocation .searchAreaBar {
+        color: #4D95D6;
+        text-overflow: ellipsis;
+        border: 1px solid #4D95D6;
+        border-radius: 0;
+        font-size: 2.3rem;
+        font-weight: bold; }
+        .landing-wrapper .intro-header .searchBoxWrapper .setlocation .searchAreaBar:focus + .wrapper > .area-codes {
+          display: block !important; }
+        .landing-wrapper .intro-header .searchBoxWrapper .setlocation .searchAreaBar::placeholder {
+          color: #AACFF0; }
+      .landing-wrapper .intro-header .searchBoxWrapper .setlocation .area-search.no-selection:hover > .wrapper > .area-codes {
+        display: block !important; }
+      .landing-wrapper .intro-header .searchBoxWrapper .setlocation .wrapper {
+        position: relative;
+        top: 5.5rem; }
+        .landing-wrapper .intro-header .searchBoxWrapper .setlocation .wrapper .area-codes {
+          width: 100%;
+          border-radius: 0;
+          max-height: 14rem;
+          overflow: auto;
+          display: none; }
+          .landing-wrapper .intro-header .searchBoxWrapper .setlocation .wrapper .area-codes .area-list {
+            color: #4D95D6; }
+      .landing-wrapper .intro-header .searchBoxWrapper .setlocation .removeArea {
+        position: absolute;
+        margin-left: -3rem;
+        z-index: 100;
+        font-size: 3rem;
+        height: 6rem;
+        line-height: 6rem;
+        cursor: pointer;
+        color: #888; }
+    .landing-wrapper .intro-header .searchBoxWrapper .landing_dropdown button.btn {
+      font-weight: 700;
+      font-size: 2rem;
+      width: 22rem; }
+    .landing-wrapper .intro-header .searchBoxWrapper .landing_dropdown .city-btn {
+      background-color: #fff;
+      border-radius: 0;
+      border: 1px solid #4D95D6; }
+      .landing-wrapper .intro-header .searchBoxWrapper .landing_dropdown .city-btn:hover {
+        color: #1565C0; }
+    .landing-wrapper .intro-header .searchBoxWrapper .landing_dropdown .city-list {
+      color: #4D95D6; }
+    .landing-wrapper .intro-header .searchBoxWrapper .landing_dropdown .category-btn {
+      background-color: #FF6D2B;
+      color: #fff;
+      border: 1px solid #FF6D2B;
+      border-radius: 0; }
+      .landing-wrapper .intro-header .searchBoxWrapper .landing_dropdown .category-btn:hover {
+        background-color: #E04904; }
+    .landing-wrapper .intro-header .searchBoxWrapper .landing_dropdown .landing_menu {
+      margin: 0;
+      border: 0;
+      border-radius: 0;
+      min-width: 22rem;
+      display: block; }
+    .landing-wrapper .intro-header .searchBoxWrapper .browseGrosery {
+      border-radius: 0;
+      width: 100%;
+      background-color: #FF6D2B;
+      color: #fff;
+      border: 1px solid #FF6D2B;
+      font-weight: 600;
+      font-size: 2rem;
+      /*font-stretch: condensed;
+            letter-spacing: 0.5px;*/ }
+      .landing-wrapper .intro-header .searchBoxWrapper .browseGrosery:hover {
+        background-color: #E04904; }
+  .landing-wrapper .intro-header .intro-message {
+    position: relative;
+    padding-top: 20%;
+    padding-bottom: 20%;
+    z-index: 5; }
+    .landing-wrapper .intro-header .intro-message .intro-title {
+      margin: 0;
+      font-size: 5rem;
+      color: #1565C0; }
+    .landing-wrapper .intro-header .intro-message .intro-tip {
+      margin-top: 1rem;
+      font-size: 3rem;
+      color: #E04904; }
+  .landing-wrapper .intro-header .scroll-jumper {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    font-size: 8rem;
+    color: #555;
+    animation-iteration-count: infinite; }
+  @media (max-width: 767px) {
+    .landing-wrapper .intro-header .intro-message {
+      padding-bottom: 15%; }
+    .landing-wrapper .intro-header .scroll-jumper {
+      display: none; } }
+
+.landing-wrapper .siteFlow {
+  text-align: center;
+  padding: 5rem 0;
+  overflow: hidden;
+  background: #FFF; }
+  .landing-wrapper .siteFlow .stepsTitle {
+    color: #1565C0;
+    font-size: 4rem;
+    margin-bottom: 2rem; }
+  .landing-wrapper .siteFlow .step {
+    text-align: center;
+    margin-top: 1.5rem; }
+    .landing-wrapper .siteFlow .step .stepImg {
+      height: 15rem;
+      width: 15rem; }
+    .landing-wrapper .siteFlow .step .stepName {
+      font-size: 2.8rem;
+      color: #1565C0; }
+    .landing-wrapper .siteFlow .step .stepMsg {
+      font-size: 2.3rem;
+      color: #E04904; }
+    .landing-wrapper .siteFlow .step:hover .stepImg {
+      -webkit-animation-iteration-count: infinite;
+      animation-iteration-count: infinite; }
+
+/*# sourceMappingURL=landing.css.map */

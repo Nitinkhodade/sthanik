@@ -1,0 +1,114 @@
+#stores .offer-wrapper {
+  display: block; }
+
+.stores {
+  margin: 9rem 0; }
+  .stores .store-banner {
+    position: relative;
+    height: 200px; }
+    .stores .store-banner .store-banner-img {
+      height: 125%;
+      width: 100%;
+      position: absolute;
+      margin-top: -5px; }
+      .stores .store-banner .store-banner-img .store-bkimg {
+        height: 100%;
+        width: 100%; }
+      .stores .store-banner .store-banner-img .background-overly {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: -webkit-linear-gradient(270deg, #fff 0, #fff 10%, rgba(255, 255, 255, 0.75) 40%, rgba(255, 255, 255, 0.4) 100%);
+        background: -webkit-linear-gradient(top, #fff 0, #fff 10%, rgba(255, 255, 255, 0.75) 40%, rgba(255, 255, 255, 0.4) 100%);
+        background: linear-gradient(180deg, #fff 0%, #fff 10%, rgba(255, 255, 255, 0.75) 40%, rgba(255, 255, 255, 0.4) 100%); }
+    .stores .store-banner .stores-details {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      color: #1565C0;
+      text-align: center; }
+      .stores .store-banner .stores-details .store-msg {
+        margin-top: 5rem;
+        font-size: 5rem; }
+        .stores .store-banner .stores-details .store-msg .count {
+          font-weight: 700; }
+      .stores .store-banner .stores-details .area-chosen {
+        font-size: 2.5rem;
+        color: #E04904;
+        font-weight: bold; }
+      .stores .store-banner .stores-details .filterStores {
+        position: absolute;
+        left: 0;
+        bottom: 1rem;
+        right: 0; }
+        .stores .store-banner .stores-details .filterStores .storeQuery {
+          height: 4rem;
+          width: 90%;
+          max-width: 600px;
+          font-size: 2.5rem;
+          border: 1px solid #1565C0;
+          padding-left: 1rem;
+          color: #1565C0; }
+          .stores .store-banner .stores-details .filterStores .storeQuery::placeholder {
+            color: #AACFF0; }
+        .stores .store-banner .stores-details .filterStores .glyphicon-search {
+          position: absolute;
+          margin-left: -3rem;
+          z-index: 100;
+          font-size: 2rem;
+          height: 4rem;
+          line-height: 4rem; }
+  .stores .store-card {
+    position: relative;
+    cursor: pointer;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2rem; }
+    .stores .store-card:hover {
+      border: 1px solid #c8c8d3;
+      -webkit-box-shadow: 0 0 5px #D1D1D7;
+      -moz-box-shadow: 0 0 5px #D1D1D7;
+      box-shadow: 0 0 5px #D1D1D7;
+      -ms-transform: scale(1.02, 1.02);
+      -webkit-transform: scale(1.02, 1.02);
+      transform: scale(1.02, 1.02); }
+    .stores .store-card .card-img {
+      display: inline-block;
+      margin: 1rem;
+      vertical-align: top; }
+      .stores .store-card .card-img > img {
+        width: 16rem;
+        height: 16rem; }
+    .stores .store-card .card-content {
+      display: inline-block;
+      font-size: 1.5rem;
+      margin-left: 1rem;
+      vertical-align: top;
+      max-width: 50%; }
+      .stores .store-card .card-content .card-title {
+        font-size: 2.5rem; }
+      .stores .store-card .card-content .sodexo_icon {
+        height: 3rem;
+        position: absolute; }
+      .stores .store-card .card-content .glyphicon {
+        margin-right: 3px; }
+      .stores .store-card .card-content .store-star {
+        font-size: 2.5rem;
+        color: black; }
+        .stores .store-card .card-content .store-star.glyphicon-star {
+          color: orange; }
+    .stores .store-card .card-menu-right {
+      position: absolute;
+      right: 3rem;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      font-size: 3rem;
+      width: 3rem;
+      height: 3rem;
+      color: #888; }
+
+/*# sourceMappingURL=stores.css.map */

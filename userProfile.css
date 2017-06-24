@@ -1,0 +1,95 @@
+/* USER PROFILE PAGE */
+#profile-page .offer-wrapper {
+  display: block; }
+
+.user-profile .tab-content {
+  margin-top: 0 !important; }
+
+.user-profile .profile-wrapper {
+  max-width: 650px;
+  background-color: white;
+  left: 0;
+  right: 0;
+  margin: 0 auto; }
+
+.user-profile .card {
+  background-color: rgba(214, 224, 226, 0.2);
+  -webkit-border-top-left-radius: 5px;
+  -moz-border-top-left-radius: 5px;
+  border-top-left-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-top-right-radius: 5px;
+  border-top-right-radius: 5px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+  .user-profile .card.hovercard {
+    position: relative;
+    padding-top: 0;
+    overflow: hidden;
+    text-align: center;
+    height: 25rem; }
+    .user-profile .card.hovercard .card-background img {
+      -webkit-filter: blur(25px);
+      -moz-filter: blur(25px);
+      -o-filter: blur(25px);
+      -ms-filter: blur(25px);
+      filter: blur(25px);
+      margin-left: -100px;
+      margin-top: -200px;
+      min-width: 130%; }
+    .user-profile .card.hovercard .useravatar {
+      position: absolute;
+      top: 15px;
+      left: 0;
+      right: 0; }
+      .user-profile .card.hovercard .useravatar img {
+        width: 15rem;
+        height: 15rem;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        border-radius: 50%;
+        border: 0.5rem solid rgba(255, 255, 255, 0.5); }
+    .user-profile .card.hovercard .card-info {
+      position: absolute;
+      bottom: 2rem;
+      left: 0;
+      right: 0;
+      overflow: hidden;
+      text-overflow: ellipsis; }
+      .user-profile .card.hovercard .card-info .card-title {
+        font-size: 3rem;
+        background-color: rgba(255, 255, 255, 0.1);
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px; }
+
+.user-profile .profileCard .card-content-wrapper .card-content .profile-row {
+  margin-top: 2rem;
+  font-size: 2.5rem;
+  color: #555; }
+  .user-profile .profileCard .card-content-wrapper .card-content .profile-row .key {
+    display: inline-block;
+    width: 45%;
+    text-align: right;
+    font-weight: 600; }
+  .user-profile .profileCard .card-content-wrapper .card-content .profile-row .value {
+    display: inline-block;
+    width: 50%;
+    text-align: left;
+    margin-left: 4%; }
+
+.user-profile .profileCard .card-content-wrapper .btn-wrap {
+  margin: 2rem 0; }
+
+.user-profile .profileEdit-card {
+  display: none;
+  border: 0 !important; }
+
+.user-profile .stepTab,
+.user-profile .well {
+  -webkit-border-radius: 0 !important;
+  -moz-border-radius: 0 !important;
+  border-radius: 0 !important; }
+
+/*# sourceMappingURL=userProfile.css.map */

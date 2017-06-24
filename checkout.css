@@ -1,0 +1,179 @@
+.savedAddress {
+  width: 300px;
+  margin: 0 auto;
+  border: 1px solid #D1D1D7;
+  padding: 15px;
+  -webkit-box-shadow: 0 0 5px #D1D1D7;
+  -moz-box-shadow: 0 0 5px #D1D1D7;
+  box-shadow: 0 0 5px #D1D1D7;
+  cursor: pointer; }
+  .savedAddress .btn-wrap {
+    margin-top: -30px; }
+
+.shippingForm {
+  width: 80%;
+  margin: 0 auto; }
+
+.summary-label {
+  border-bottom: 1px solid #ddd;
+  color: #FF6D2B; }
+
+.summary-content {
+  padding: 0 15px; }
+
+.address-review {
+  width: 300px;
+  margin: 0 auto;
+  border: 1px solid #D1D1D7;
+  padding: 15px;
+  -webkit-box-shadow: 0 0 5px #D1D1D7;
+  -moz-box-shadow: 0 0 5px #D1D1D7;
+  box-shadow: 0 0 5px #D1D1D7; }
+
+.items-review {
+  width: 95%;
+  border: 1px solid #D1D1D7;
+  padding: 15px;
+  -webkit-box-shadow: 0 0 5px #D1D1D7;
+  -moz-box-shadow: 0 0 5px #D1D1D7;
+  box-shadow: 0 0 5px #D1D1D7; }
+
+.mobile .items-review {
+  margin: 2rem; }
+
+.customerRemarks {
+  float: left; }
+
+.amount-wrapper {
+  float: right; }
+  .amount-wrapper .totalAmount {
+    font-size: 2.3rem; }
+  .amount-wrapper .amount-row {
+    margin: 2rem 0; }
+    .amount-wrapper .amount-row .row-value {
+      font-weight: bold; }
+
+/********* Overrides *******/
+.checkout-wrapper .checkout-btn {
+  display: none; }
+
+.checkout-wrapper .total-amount {
+  font-size: 2rem;
+  margin-right: 5rem; }
+
+.checkout-wrapper .deliveryAmount {
+  overflow: auto; }
+  .checkout-wrapper .deliveryAmount .amount {
+    margin-right: 7rem;
+    font-size: 1.8rem; }
+
+.checkout-wrapper .coupon-wrapper {
+  text-align: right; }
+  .checkout-wrapper .coupon-wrapper .apply-coupon-wrapper {
+    float: right; }
+  .checkout-wrapper .coupon-wrapper .couponApplied {
+    font-size: 1.7rem;
+    text-align: right; }
+  .checkout-wrapper .coupon-wrapper .couponUsed {
+    font-weight: bold;
+    font-size: 2rem; }
+
+/*************************************/
+.checkout-wrapper.sthanik-page {
+  background: url(../images/sthanik-background.jpg);
+  padding-bottom: 8rem; }
+  .checkout-wrapper.sthanik-page .board {
+    min-height: 200px;
+    background: #fff;
+    position: relative;
+    padding: 0;
+    box-shadow: 10px 10px #ccc,-10px 20px #ddd;
+    -webkit-box-shadow: 10px 10px #ccc,-10px 20px #ddd;
+    -moz-box-shadow: 10px 10px #ccc,-10px 20px #ddd; }
+    .checkout-wrapper.sthanik-page .board .liner {
+      height: 4px;
+      background: #ddd;
+      position: absolute;
+      width: 80%;
+      margin: 0 auto;
+      left: 0;
+      right: 0;
+      top: 50%;
+      z-index: 1; }
+    .checkout-wrapper.sthanik-page .board .board-inner-head {
+      background: #fafafa;
+      background-size: 30%;
+      width: 100%; }
+    .checkout-wrapper.sthanik-page .board .nav-tabs {
+      position: relative;
+      /* border-bottom: 0; */
+      /* width: 80%; */ }
+      .checkout-wrapper.sthanik-page .board .nav-tabs .tab-block {
+        width: 25%; }
+        .checkout-wrapper.sthanik-page .board .nav-tabs .tab-block .step {
+          width: 8rem;
+          height: 8rem;
+          margin: 20px auto;
+          border-radius: 100%;
+          padding: 0; }
+          .checkout-wrapper.sthanik-page .board .nav-tabs .tab-block .step:hover {
+            background: transparent; }
+        .checkout-wrapper.sthanik-page .board .nav-tabs .tab-block.active > .step, .checkout-wrapper.sthanik-page .board .nav-tabs .tab-block.active > .step:hover, .checkout-wrapper.sthanik-page .board .nav-tabs .tab-block.active > .step:focus {
+          color: #555555;
+          cursor: default;
+          border: 0;
+          border-bottom-color: transparent; }
+        .checkout-wrapper.sthanik-page .board .nav-tabs .tab-block.active:after {
+          content: " ";
+          position: absolute;
+          width: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          margin: 0 auto;
+          border: 10px solid transparent;
+          border-bottom-color: #ddd;
+          transition: 0.1s ease-in-out; }
+        .checkout-wrapper.sthanik-page .board .nav-tabs .tab-block.disabled > .step, .checkout-wrapper.sthanik-page .board .nav-tabs .tab-block.disabled > .step:hover, .checkout-wrapper.sthanik-page .board .nav-tabs .tab-block.disabled > .step:focus {
+          cursor: default;
+          border: 0;
+          border-bottom-color: transparent; }
+        .checkout-wrapper.sthanik-page .board .nav-tabs .tab-block.disabled .round-tabs {
+          color: #ddd;
+          border: 2px solid #ddd; }
+      .checkout-wrapper.sthanik-page .board .nav-tabs .round-tabs {
+        width: 8rem;
+        height: 8rem;
+        line-height: 8rem;
+        display: inline-block;
+        border-radius: 100px;
+        background: white;
+        z-index: 2;
+        position: absolute;
+        left: 0;
+        text-align: center;
+        font-size: 2.8rem; }
+        .checkout-wrapper.sthanik-page .board .nav-tabs .round-tabs.one {
+          color: #22c222;
+          border: 2px solid #22c222; }
+        .checkout-wrapper.sthanik-page .board .nav-tabs .round-tabs.two {
+          color: #febe29;
+          border: 2px solid #febe29; }
+        .checkout-wrapper.sthanik-page .board .nav-tabs .round-tabs.three {
+          color: #3e5e9a;
+          border: 2px solid #3e5e9a; }
+        .checkout-wrapper.sthanik-page .board .nav-tabs .round-tabs.four {
+          color: #f1685e;
+          border: 2px solid #f1685e; }
+        .checkout-wrapper.sthanik-page .board .nav-tabs .round-tabs.five {
+          color: #999;
+          border: 2px solid #999; }
+        .checkout-wrapper.sthanik-page .board .tab-content .tab-pane {
+          position: relative;
+          min-height: 30rem; }
+        .checkout-wrapper.sthanik-page .board .tab-content .tab-pane .btn-wrapper {
+          margin: 3.5rem 5rem; }
+        .checkout-wrapper.sthanik-page .board .tab-content .tab-pane .head {
+          color: #1565C0; }
+
+/*# sourceMappingURL=checkout.css.map */

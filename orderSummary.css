@@ -1,0 +1,40 @@
+.summary-label {
+  border-bottom: 1px solid #ddd;
+  color: #FF6D2B; }
+
+.summary-content {
+  padding: 0 15px; }
+
+.address-review {
+  width: 300px;
+  margin: 0 auto;
+  border: 1px solid #D1D1D7;
+  padding: 15px;
+  -webkit-box-shadow: 0 0 5px #D1D1D7;
+  -moz-box-shadow: 0 0 5px #D1D1D7;
+  box-shadow: 0 0 5px #D1D1D7; }
+
+.items-review {
+  width: 95%;
+  border: 1px solid #D1D1D7;
+  padding: 15px;
+  -webkit-box-shadow: 0 0 5px #D1D1D7;
+  -moz-box-shadow: 0 0 5px #D1D1D7;
+  box-shadow: 0 0 5px #D1D1D7; }
+
+.mobile .items-review {
+  margin: 2rem; }
+
+.customerRemarks {
+  float: left; }
+
+.amount-wrapper {
+  float: right; }
+  .amount-wrapper .totalAmount {
+    font-size: 2.3rem; }
+  .amount-wrapper .amount-row {
+    margin: 2rem 0; }
+    .amount-wrapper .amount-row .row-value {
+      font-weight: bold; }
+
+/*# sourceMappingURL=orderSummary.css.map */

@@ -1,0 +1,31 @@
+.vendor-signup .decorator-container #decorator {
+  padding: 1.5rem 0;
+  height: 20rem;
+  position: relative;
+  display: table; }
+  .vendor-signup .decorator-container #decorator .decorate-img {
+    height: 14rem;
+    width: 14rem;
+    display: inline-block;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0; }
+  .vendor-signup .decorator-container #decorator .decorator-desc {
+    display: table-cell;
+    font-size: 3.5rem;
+    padding-left: 20rem;
+    height: 100%;
+    vertical-align: middle;
+    color: #999; }
+
+.vendor-signup md-autocomplete {
+  font-size: 2rem; }
+  .vendor-signup md-autocomplete md-input-container {
+    margin: 5px 0 15px; }
+    .vendor-signup md-autocomplete md-input-container .md-errors-spacer {
+      min-height: 0; }
+      .vendor-signup md-autocomplete md-input-container .md-errors-spacer .error-msg {
+        font-size: initial; }
+
+/*# sourceMappingURL=vendorSignUp.css.map */
