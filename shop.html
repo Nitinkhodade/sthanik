@@ -1,0 +1,171 @@
+<div class="shop-wrapper" ng-init="init()">
+    <nav class="navbar sidebar hiding-bar collapse-menu" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <!-- <div class="navbar-header"> -->
+            <!-- <a class="navbar-brand" href="">Categories</a> -->
+            <!-- <div><a class="navbar-brand store-select" ng-init="sc.showStores=false" data-ng-mouseenter="sc.showStores=true">{{rc.selectedStore}}</a></div>
+                <div class="store-dropdown-wrapper">
+                    <div class="dropside store-dropdown" data-ng-mouseleave="sc.showStores=false" ng-show="sc.showStores" ng-controller="StoresCtrl as stc" ng-include="'common/views/stores_new.html'">
+                    </div>
+                </div>
+            </div> -->
+            <div class="side-collapse" data-ng-mouseenter="sc.showStores=false" id="bs-sidebar-navbar-collapse-1">
+                <!-- Menu desktop template -->
+                <ul class="nav navbar-nav" style=" width: 100%; " ng-if="rc.mobile===false">
+                    <li ng-repeat="item in menuItem" data-ng-mouseenter='sc.showSubMenu($event, item)' data-ng-mouseleave='sc.hideSubMenu($event, item)' ng-class="{dropdown:item.subMenu !== null}">
+                        <a href="" ng-click="sc.getProduct(item,null,null)">{{item.menuName}} <span ng-if="item.subMenu !== null" class="caret caret-right"></span> <span style="font-size:16px;" class="pull-right showopacity sthanik-icon sthanik-icon_{{item.id}}"></span></a>
+                        <ul ng-if="item.subMenu !== null" class="dropdown-menu forAnimate side-sub-menu level-2" role="menu">
+                            <li ng-repeat="subMenuItem in item.subMenu" data-ng-mouseenter='sc.showSubMenu($event, item)' data-ng-mouseleave='sc.hideSubMenu($event, item)' ng-class="{dropdown:subMenuItem.subMenu !== null}">
+                                <a href="" ng-click="sc.getProduct(item,subMenuItem,null)">{{subMenuItem.menuName}}<span ng-if="subMenuItem.subMenu !== null"  class="caret caret-right"></span></a>
+                                <ul class="dropdown-menu forAnimate side-sub-menu level-3" ng-if="subMenuItem.subMenu !== null" role="menu">
+                                    <li ng-repeat="subMenuItem2 in subMenuItem.subMenu"> <a href="" ng-click="sc.getProduct(item,subMenuItem,subMenuItem2)">{{subMenuItem2.menuName}}</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <!-- Menu Mobile Template -->
+                <ul class="nav navbar-nav mobi-tmplt" ng-if="rc.mobile===true">
+                    <li ng-repeat="item in menuItem" ng-class="{dropdown:item.subMenu !== null}">
+                        <a href="" ng-class="{'dropdown-toggle':item.subMenu !== null}" data-toggle="dropdown">
+                            <span ng-click="sc.getProduct(item,null,null)">{{item.menuName}} </span>
+                            <span ng-if="item.subMenu !== null" class="pull-right glyphicon glyphicon-plus"></span>
+                        </a>
+                        <ul ng-if="item.subMenu !== null" class="dropdown-menu forAnimate side-sub-menu level-2" role="menu">
+                            <li ng-repeat="subMenuItem in item.subMenu" ng-class="{dropdown:subMenuItem.subMenu !== null}">
+                                <a href="" ng-click="rc.menuClick($event);sc.getProduct(item,subMenuItem,null)" ng-class="{'dropdown-toggle':subMenuItem.subMenu !== null}" data-toggle="dropdown">{{subMenuItem.menuName}}</a>
+                                <ul class="dropdown-menu forAnimate side-sub-menu level-3" ng-if="subMenuItem.subMenu !== null" role="menu">
+                                    <li ng-repeat="subMenuItem2 in subMenuItem.subMenu"> <a href="" ng-click="rc.menuClick($event);sc.getProduct(item,subMenuItem,subMenuItem2)">{{subMenuItem2.menuName}}</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="mask"></div>
+    <div class="main">
+        <!-- As of now keeping here... need to move to right place later..  -->
+        <!-- Content Here -->
+        <div class="container main-content">
+            <!-- <div class="col-md-3">
+      Filters Block
+    </div> -->
+            <div class="store-details-pan col-sm-3">
+
+                <div class="store-name">{{store.name}}
+                    <span> ({{store.category}})</span>
+                    <favorite-store rc="rc" store="store" extracls="'store-star'"></favorite-store>
+                </div>
+                <div class="store-img"><img src="{{store.imageUrl}}" alt="{{store.name}}"></div>
+                <div class="store-details">
+                    <div class="openTimings">
+                        <span class="glyphicon glyphicon-map-marker"></span> {{store.address.addressLine1}} {{store.address.addressLine2}}
+                    </div>
+                    <div class="openTimings">
+                        <span class="glyphicon glyphicon-time"></span> {{store.timings}}
+                    </div>
+                    <div class="contactNo">
+                        <span class="glyphicon glyphicon-earphone"></span> {{store.contactNo}}
+                    </div>
+                    <div ng-if="store.timings" class="deliveryMsg">
+                        <span class="glyphicon glyphicon-tag"></span>{{store.freeDeliveryMessage}} ({{store.stdDeliveryTime}})
+                    </div>
+                    <img ng-if="store.sodexoAllowed === 'Y'" class="sodexo_icon" src="/common/images/sodexo_icon.png">
+                </div>
+                <div ng-click="sc.changeStore()" class="pull-right btn btn-primary change">Change store</div>
+            </div>
+            <div class="col-sm-9">
+                <div class="row" ng-if="breadcrum.length > 1">
+                    <ol class="breadcrumb">
+                        <li ng-repeat="level in breadcrum"><a ng-click="!($last) && sc.getProductByBreadcrum(level.menuId,$index)">{{level.menuName}}</a></li>
+                    </ol>
+                </div>
+                <div class="row" when-scrolled="sc.loadMore()">
+                    <div ng-if="!store.isListView" class="gridview">
+                        <div class="col-xs-6 col-sm-3" ng-repeat="product in sc.products as product_results">
+                            <div class="thumbnail item-card">
+                                <img class="item-image" ng-lazy-src="{{product.imageUrl}}" alt="{{product.productName}}" err-img>
+                                <div class="item-image no-img">
+                                    <div class="noImageTemplate">
+                                        <span class="glyphicon glyphicon-camera"></span>
+                                        <div> No Image </div>
+                                    </div>
+                                </div>
+                                <div class="caption">
+                                    <div class="item-title">
+                                        {{product.productName}}
+                                    </div>
+                                    <div class="item-info">
+                                        <div class="item-availin pull-left">
+                                            <select class="availin-dropdown" name="mySelect" id="mySelect" ng-init="selectedOption=product.options[0]" ng-change="sc.setProductCurrentOption($index, selectedOption)" ng-options="option.optionValue+option.optionUnit for option in product.options track by option.optionId"
+                                                    ng-model="selectedOption"></select>
+                                        </div>
+                                        <div class="item-price-wrapper pull-right">
+                                            <div class="item-price">Rs. {{product.sprice}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="modify-items">
+                                        <div class="remove-item pull-left">
+                                            <!-- <a class="glyphicon glyphicon-minus" ng-click="sc.removeItemFromCart(product)"></a> -->
+                                            <remove-item-frm-cart rc="rc" product="product" extracls="''"></remove-item-frm-cart>
+                                        </div>
+                                        <div class="item-count" ng-if="rc.cart.itemsQuantity[product.itemId]">
+                                            <span class="glyphicon glyphicon-shopping-cart"></span>
+                                            <span class='count'>{{rc.cart.itemsQuantity[product.itemId]}}</span>
+                                        </div>
+                                        <div class="add-item pull-right">
+                                            <!-- <a class="glyphicon glyphicon-plus" ng-click="sc.addItemToCart(product)"></a> -->
+                                            <add-item-to-cart rc="rc" product="product" extracls="''"></add-item-to-cart>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="store.isListView" class="listview">
+                        <div class="item-list-card" ng-repeat="product in sc.products as product_results">
+                            <div class="thumbnail item-card">
+                                <div class="item-details-top">
+                                    <div class="item-title">
+                                        {{product.productName}}
+                                    </div>
+                                    <div class="item-price-wrapper pull-right">
+                                        <div class="item-availin">
+                                            <select class="availin-dropdown" name="mySelect" id="mySelect" ng-init="selectedOption=product.options[0]" ng-change="sc.setProductCurrentOption($index, selectedOption)" ng-options="option.optionValue+option.optionUnit for option in product.options track by option.optionId"
+                                                    ng-model="selectedOption"></select>
+                                        </div>
+                                        <div class="item-price">Rs. {{product.sprice}}</div>
+                                    </div>
+                                </div>
+                                <div class="item-desc"></div>
+                                <div class="modify-items">
+                                    <div class="remove-item pull-left">
+                                        <!-- <a class="glyphicon glyphicon-minus" ng-click="sc.removeItemFromCart(product)"></a> -->
+                                        <remove-item-frm-cart rc="rc" product="product" extracls="''"></remove-item-frm-cart>
+                                    </div>
+                                    <div class="item-count" ng-if="rc.cart.itemsQuantity[product.itemId]">
+                                        <span class="glyphicon glyphicon-shopping-cart"></span>
+                                        <span class='count'>{{rc.cart.itemsQuantity[product.itemId]}}</span>
+                                    </div>
+                                    <div class="add-item pull-right">
+                                        <!-- <a class="glyphicon glyphicon-plus" ng-click="sc.addItemToCart(product)"></a> -->
+                                        <add-item-to-cart rc="rc" product="product" extracls="''"></add-item-to-cart>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="!processing && product_results.length === 0" class="products_empty-msg">
+                        <h3>Woohh!!! No items found </h3>
+                        <img style=" width: 50rem; " src="./common/images/no_results.png" />
+                    </div>
+                </div>
+                <spinner flag="itemsLoading"></spinner>
+            </div>
+        </div>
+    </div>
+</div>

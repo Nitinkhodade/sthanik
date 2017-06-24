@@ -1,0 +1,95 @@
+<section class="checkout-wrapper sthanik-page" ng-init="init()">
+    <div class="container">
+        <div class="row">
+            <div class="board">
+                <div class="board-inner-head">
+                    <ul class="nav nav-tabs" id="myTab">
+                        <div class="liner"></div>
+                        <li class="tab-block active">
+                            <a data-target="#reviewCart" class="step" data-toggle="tab" title="Review Cart Items">
+                                <span class="round-tabs one">1</span>
+                            </a>
+                        </li>
+
+                        <li class="tab-block disabled">
+
+                            <a data-target="#selectAddress" class="step" data-toggle="tab" title="Shipping Address">
+                                <span class="round-tabs two">2</span>
+                            </a>
+                        </li>
+                        <li class="tab-block disabled">
+                            <a data-target="#reviewOrder" class="step" data-toggle="tab" title="Review Complete Order">
+                                <span class="round-tabs three">3</span>
+                            </a>
+                        </li>
+
+                        <li class="tab-block finish-tab disabled">
+                            <a data-target="#done" class="step" data-toggle="tab" title="Finish">
+                                <span class="round-tabs four">
+                                    <i class="glyphicon glyphicon-ok"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="reviewCart">
+                        <h2 class="head text-center">Review cart items</h2>
+                        <div class="cart-model" ng-controller="CartCtrl as cac" ng-include="'common/views/cart-modal.html'"></div>
+                        <div class="deliveryAmount">
+                            <!-- <div class="pull-right amount">Shipping Charges: Rs.{{rc.cart.deliveryCharges}}</div> -->
+                        </div>
+                        <ul class="list-inline pull-right btn-wrapper">
+                            <li>
+                                <a href="/shop/s" type="button" class="btn btn-default prev-step" title="Forgot to add something to your cart, click here to go back to your store">Continue Shopping</a>
+                            </li>
+                            <li>
+                                <button type="button" ng-disabled="rc.cart.cartCount < 1" class="btn btn-primary next-step" title="Select your delivery address">Select Address</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane fade" id="selectAddress">
+                        <h2 class="head text-center">Select Shipping Address</h2>
+                        <div class="" ng-controller="shippingCtrl" ng-include="'common/views/shippingDetail.html'"></div>
+                        <ul class="list-inline pull-right btn-wrapper">
+                            <li>
+                                <a href="/shop/s" type="button" class="btn btn-default prev-step" title="Forgot to add something to your cart, click here to go back to your store">Continue Shopping</a>
+                            </li>
+                            <li>
+                                <button type="button" class="btn btn-default prev-step">Previous</button>
+                            </li>
+                            <li>
+                                <button type="button" ng-disabled="!rc.addressAvailable" class="btn btn-primary next-step" title="Proceed to review your cart and submit order">Proceed to Checkout</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane fade" id="reviewOrder">
+                        <h2 class="head text-center">Review Complete Order</h2>
+                        <div class="" ng-controller="orderSummaryCtrl" ng-include="'common/views/orderSummary.html'"></div>
+                        <ul class="list-inline pull-right btn-wrapper">
+                            <li>
+                                <a href="/shop/s" type="button" class="btn btn-default prev-step" title="Forgot to add something to your cart, click here to go back to your store">Continue Shopping</a>
+                            </li>
+                            <li>
+                                <button type="button" class="btn btn-default prev-step">Previous</button>
+                            </li>
+                            <li>
+                                <button type="button" class="btn btn-primary btn-info-full makeOrder" title="Confirm and place order">Place Order</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane fade text-center" id="done" ng-init="includeTemplate=false">
+                        <div ng-if="includeTemplate">
+                        <div ng-controller="completeOrderCtrl as co" ng-init="co.withInApp=true" ng-include="'common/views/completeOrder.html'"></div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div ng-if="checkoutLoader" class="spinnerWrapper" ng-init="checkoutLoader=false">
+                    <img src="./common/images/spinner.gif">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,23 @@
+<div class="stores" ng-init="init()">
+    <div class="wrapper">
+        <div class="col-xs-4" ng-repeat=" store in stores as store_results">
+            <div class="thumbnail store-card" ng-click="stc.setCurrentStore(store)">
+                <img style="height: 17rem;" ng-src="{{store.imageUrl}}" alt="{{store.imageUrl}}">
+                <small>Open Timings: {{store.timings}} <b ng-if="store.sodexoAllowed === 'Y'">We accept Sodexo</b></small>
+                <div><small>{{store.freeDeliveryMessage}}</small></div>
+                <div class="caption">
+                    <div class="item-title">
+                        <a href="">{{store.name}} </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-if="store_results.length === 0" class="products_empty-msg">
+            <h3>Ooopss!!! No Store is registerd with us nearby you :( </h3>
+            <h3> Suggest us store with details to serve you</h3>
+        </div>
+        <spinner flag="storesLoading"></spinner>
+    </div>
+    <!--h1> This is a new Page for stores</h1>
+ <a href="/shop" ng-repeat=" store in stores"><h2>{{store.name}}</h2></a-->
+</div>

@@ -1,0 +1,121 @@
+<div class="sthanikTplPage-wrapper" ng-controller="createPayoutCtrl" ng-init="init()">
+    <div class="sthanik-page">
+        <div class="board">
+            <div class="tab-content">
+                <!-- contents of the page -->
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h4>Create Payout</h4></div>
+                    <div class="panel-body">
+                        <label>Usage:</label>
+                        Select a vendor and Accounting cycle to create payout. Search will bring back all the delivered orders and generate a summary of payout.<br/>
+                        If Total amount payble is negative, then vendors needs to pay that amount to Sthanik. And if the amount is positive then Sthanik needs to pay it to vendor.<br/>
+                        <label>Note: </label> Once you Create Payout, it will group all the delivered orders for the selected vendor and accounting period and creates a payout request. Once the request is created, these orders will not be shown in search results again.
+                    </div>
+
+                    <form name="dtls">
+                        <div class="searchFields">
+                            <div class="col-sm-3">
+                                <label>Vendor: </label>&nbsp;
+                                <select class="vendor-dropdown field" ng-model="dtls.vendorId"
+                                        ng-options="vendor.vendorId as vendor.name for vendor in vendorList">
+                                    <option value="">Select vendor</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-5">
+                                <label>Accounting Period: </label>&nbsp;
+                                <select class="vendor-dropdown field" ng-model="dtls.accountingPeriod"
+                                        ng-options="accountingPeriod as ( 'From ' + (accountingPeriod.dateStart | date:'dd-MMM-yyyy') + ' To ' + (accountingPeriod.dateEnd | date:'dd-MMM-yyyy')) for accountingPeriod in accountingPeriods">
+                                    <option value="">Select period</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-2">
+                                <button type="submit" class="btn btn-primary" ng-click="getVendorOrders(dtls)">Search</button>
+                            </div>
+                            <div class="col-sm-2">
+                                <button class="btn btn-primary" ng-click="createPayoutRequest()">Create Payout</button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+
+                <div class="listview">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><h4>Orders</h4></div>
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Order id</th>
+                                <th>Customer name</th>
+                                <th>Order date</th>
+                                <th>Delivery date</th>
+                                <th>Pay mode</th>
+                                <th>Order total</th>
+                                <th>Discount</th>
+                                <th>Delivery Charge</th>
+                                <th>Grand total</th>
+                                <th>Vendor Bill Amount</th>
+                                <th>Vendor SerCharge</th>
+                                <th>Amount Adjusted</th>
+                                <th>Amount payable to vendor</th>
+                                <th width="10%">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="orderDtls in orderList" ng-class="orderDtls.readyForPayout === 'Y' && 'success' || (orderDtls.grandTotal != orderDtls.vendorAmount && 'warning' || 'active') ">
+                                <td>{{orderDtls.orderId}}</td>
+                                <td>{{orderDtls.custName}}</td>
+                                <td>{{orderDtls.orderDate | date:'dd/MM/yyyy, hh:mm:ss a'}}</td>
+                                <td>{{orderDtls.deliveryDate | date:'dd/MM/yyyy, hh:mm:ss a'}}</td>
+                                <td>{{orderDtls.payMode}}</td>
+                                <td>{{orderDtls.orderTotal}}</td>
+                                <td>{{orderDtls.discount}}</td>
+                                <td>{{orderDtls.deliveryCharges}}</td>
+                                <td>{{orderDtls.grandTotal}}</td>
+                                <td>{{orderDtls.vendorAmount}}</td>
+                                <td>{{orderDtls.vendorServiceCharge}}</td>
+                                <td>{{orderDtls.amountAdjusted}} </td>
+                                <td>{{orderDtls.amountPayable}} </td>
+                                <td width="10%"><a href="#" ng-if="orderDtls.readyForPayout != 'Y'" ng-click="update(orderDtls)" title="Mark as Ready for Payout"><span class="glyphicon glyphicon-ok-circle"></span></a>
+                                    <a href="#" ng-if="orderDtls.readyForPayout != 'Y'" ng-click="adjust(orderDtls)" title="Make Manual Adjustments"><span class="glyphicon glyphicon-plus-sign"></span></a>
+                                    <a href="#" ng-click="viewAdjustments(orderDtls)" title="View Manual Adjustments"><span class="glyphicon glyphicon-eye-open"></span></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="12"></td>
+                                <td>Order Total</td>
+                                <td>{{sumOrderTotal}}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="12"></td>
+                                <td>COD Total</td>
+                                <td>{{sumCODTotal}}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="12"></td>
+                                <td>Paid Online Total</td>
+                                <td>{{sumPayOnlineTotal}}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="12"></td>
+                                <td>Discount Total</td>
+                                <td>{{sumDiscountTotal}}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="12"></td>
+                                <td>Service Charge Total</td>
+                                <td>{{sumServiceChargeTotal}}</td>
+                            </tr>
+                            <tr>
+                                <th colspan="12"></th>
+                                <th colspan="1">Total Amount Payable to Vendor</th>
+                                <th>{{sumAmountPayable}}</th>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="contactUs-wrapper sthanik-page" ng-controller="contactUsCtrl">
+    <div class="container">
+        <div class="row">
+            <div class="board">
+                <div class="board-inner-head">
+                    <div class="title">
+                        <h1>Contact Us</h1>
+                    </div>
+                </div>
+                <div class="tab-content">
+                    <div class="note">
+                        <p>We are here to answer any questions you may have about our products. Reach out to us and we'll respond as soon as we can.</p>
+                        <p>Even if there is something you have always wanted to experience and can't find it on sthanik, let us know and we promise we'll do our best to implement it for you.</p>
+                        <p>We would like to here from you. Please email Us at <b>customerservice@sthanik.com</b> or send us quick message by submitting below fields.</p>
+                    </div>
+
+                    <form name="userForm" ng-submit="submitContactUs(credentials,userForm.$valid)" novalidate>
+                        <div class="form-group" ng-class="{
+                                   'has-error': (userForm.name.$dirty || userForm.$submitted) && !userForm.name.$valid,
+                                   'has-success': (userForm.name.$dirty || userForm.$submitted) && userForm.name.$valid
+                                   }">
+                            <span class="field"><input type="text" ng-model="credentials.name" required class="form-control" placeholder="Enter Name" id="name"></span>
+                            <p ng-show="userForm.name.$error.required && (userForm.name.$dirty || userForm.$submitted)" class="help-block">Name is required.</p>
+                        </div>
+                        <div class="form-group" ng-class="{
+                                   'has-error': (userForm.email.$dirty || userForm.$submitted) && !userForm.email.$valid,
+                                   'has-success': (userForm.email.$dirty || userForm.$submitted) && userForm.email.$valid
+                                   }">
+                            <span class="field"><input type="text" ng-model="credentials.email" class="form-control" placeholder="Enter Email" required name="email" id="email"></span>
+                            <p ng-show="userForm.email.$error.required && (userForm.email.$dirty || userForm.$submitted)" class="help-block">Email is required.</p>
+                        </div>
+                        <div class="form-group" ng-class="{
+                                   'has-error': (userForm.message.$dirty || userForm.$submitted) && !userForm.message.$valid,
+                                   'has-success': (userForm.message.$dirty || userForm.$submitted) && userForm.message.$valid
+                                   }">
+                            <span class="field"><textarea cols="40" rows="5" ng-model="credentials.message" name="message" placeholder = "Enter Message" class="form-control" required  id="id_message"></textarea></span>
+                            <p ng-show="userForm.message.$error.required && (userForm.message.$dirty || userForm.$submitted)" class="help-block">Message is required.</p>
+                        </div>
+                        <div class="form-group pull-right btn-wrapper">
+                            <button type="submit" class="btn btn-primary">SEND</button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,142 @@
+<div class="navbar navbar-fixed-top nav-bg" role="navigation">
+    <div class="menu-wrapper">
+        <div class='hb-wrapper col-xs-1'>
+            <a class="mobie-hamburger-menu navicon" ng-click="rc.menuClick($event)"></a>
+        </div>
+
+        <div class="container-fluid menu col-xs-11">
+            <div class="navbar-header col-xs-7 col-sm-3">
+                <!-- <a class="navbar-brand site-name" href="/">Sthanik</a> -->
+                <a class="navbar-brand site-name" href="/">
+                    <img class="sthanik-logo" src="/common/images/logo.png" />
+                    <span class="site-text">thanik</span>
+                </a>
+            </div>
+            <div class="pull-right nav-icon-btns col-xs-5 col-sm-9">
+                <div class="col-xs-6 middle-search">
+                    <form class="navbar-form nav-search" role="search">
+                        <div class="input-group add-on">
+                            <input type="text" class="form-control grocerySearch" placeholder="Start typing your product name" name="srch-term" id="srch-term" ng-model="rc.searchInput">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" type="submit" ng-click="onItemSearchClick(rc.searchInput)"><i class="glyphicon glyphicon-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div ng-class="{'col-xs-6':rc.mobile===false}" class="nav-options">
+                    <div ng-if="rc.showOfferSticker" class="offer-wrapper" class="btn btn-default" data-toggle="modal" data-target="#offerModal">
+                        <span class="v_ribbon">
+                            <img src="/common/images/SpecialOffer.png">
+                        </span>
+                        <div class="line"></div>
+                        <div class="giftIcon">
+                            <img src="/common/images/Gift.png">
+                        </div>
+                    </div>
+                    <div class="user-block" ng-controller="loginCtrl">
+                        <div ng-if="!rc.isValidSession()">
+                            <div class="nav-btn-wrapper">
+                                <div class="btn btn-default nav-btn" data-toggle="modal" data-target="#signInModal" data-ng-mouseenter="rc.showDropdown($event,true)" ng-click="ct.showLogin=!ct.showLogin;rc.showDropdown($event,ct.showLogin)" ng-init="ct.showLogin=false">
+                                    <!-- <span class="signin-text top-menu-name"> Sign In </span> -->
+                                    <span class="glyphicon glyphicon-user"></span>
+                                </div>
+                                <div class="top-dropdown-wrapper" data-ng-mouseleave="rc.showDropdown($event,false)">
+                                    <div class="dropdown-sthanik">
+                                        <div class="login-dropdown" ng-controller="ShopCtrl" ng-include="'common/views/login-modal.html'"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div ng-if="rc.isValidSession()">
+                            <div class="nav-btn-wrapper dropdown">
+                                <div class="profilepic nav-btn" data-ng-mouseenter="rc.showDropdown($event,true)" ng-click="ct.showUser=!ct.showUser;rc.showDropdown($event,ct.showUser)" ng-init="ct.showUser=false">
+                                    <img ng-if="rc.signinresponse.imgUrl !== null" ng-src="{{rc.signinresponse.imgUrl}}" alt="" class="nav-img" />
+                                    <img ng-if="rc.signinresponse.imgUrl === null" src="common/images/default-avatar.png" alt="" class="nav-img" />
+                                    <!-- <span ng-if="rc.rc.signinresponse.imgUrl === null" class="glyphicon glyphicon-user nav-img"></span> -->
+                                </div>
+                                <div class="top-dropdown-wrapper dropdown-user" data-ng-mouseleave="rc.showDropdown($event,false)">
+                                    <div class="dropdown-sthanik user-menu-wrapper">
+                                        <div class="user-info">
+                                            <!-- <div>{{$root.welcomeUser}}</div> -->
+                                            <h5>{{rc.signinresponse.displayName}}</h5> <small>{{rc.signinresponse.email}}</small>
+                                            <!-- <h5>Chaitanya Mullangi</h5> <small>mckrishna.maaya@gmail.com</small> -->
+                                        </div>
+                                        <ul class="user-menu">
+                                            <li ng-click="rc.displayProfile()" ng-if="rc.isUser()">
+                                                <a class="user-menu-link" href=""><span class="glyphicon glyphicon-user"></span>My Profile</a>
+                                            </li>
+                                            <li ng-click="rc.displayFavoriteStores()" ng-if="rc.isUser()">
+                                                <a class="user-menu-link" href=""><span class="glyphicon glyphicon-star"></span>My Favorite Stores</a>
+                                            </li>
+                                            <li ng-click="rc.displayOrderHistory()" ng-if="rc.isUser()">
+                                                <a class="user-menu-link" href=""><span class="glyphicon glyphicon-stats"></span>My Order History</a>
+                                            </li>
+                                            <li ng-click="rc.displayShopItemExportImport()" ng-if="rc.isVendor()">
+                                                <a class="user-menu-link" href=""><span class="glyphicon glyphicon-transfer"></span>Shop Item Exp-Imp</a>
+                                            </li>
+                                            <li ng-click="rc.displayShopInventory()" ng-if="rc.isVendor()">
+                                                <a class="user-menu-link" href=""><span class="glyphicon glyphicon-tag"></span>Shop Inventory</a>
+                                            </li>
+                                            <li ng-click="rc.displayVendorOrder()" ng-if="rc.isVendor()">
+                                                <a class="user-menu-link" href=""><span class="glyphicon glyphicon-tag"></span>Manage Order</a>
+                                            </li>
+                                            <li ng-click="rc.displayCreatePayout()" ng-if="rc.isAdmin()">
+                                                <a class="user-menu-link" href=""><span class="glyphicon glyphicon-credit-card"></span>Create Payout</a>
+                                            </li>
+                                            <li ng-click="rc.displaySearchPayout()" ng-if="rc.isAdmin()">
+                                                <a class="user-menu-link" href=""><span class="glyphicon glyphicon-credit-card"></span>Search Payout</a>
+                                            </li>
+                                            <li ng-click="rc.displayBuyers()" ng-if="rc.isDistributor()">
+                                                <a class="user-menu-link" href=""><span class="glyphicon glyphicon-tag"></span>Buyers</a>
+                                            </li>
+                                            <li ng-click="rc.manageInventory()" ng-if="rc.isAdmin()">
+                                                <a class="user-menu-link" href=""><span class="glyphicon glyphicon-tag"></span>Manage Inventory</a>
+                                            </li>
+                                            <li ng-click="rc.logout()">
+                                                <a class="user-menu-link" href=""><span class="glyphicon glyphicon-log-out"></span>Logout</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="nav-btn-wrapper">
+                        <div class="btn btn-default nav-btn cart-btn" data-ng-mouseenter="rc.showDropdown($event,true)" ng-click="ct.showCart=!ct.showCart;rc.showDropdown($event,ct.showCart)" ng-init="ct.showCart=false">
+                            <!-- <span class="signin-text top-menu-name"> Cart </span> -->
+                            <span class="glyphicon glyphicon-shopping-cart"></span>
+                            <div class="cart-count-wrapper" ng-if="rc.cart.cartCount > 0">
+                                <div class="cart-count-badge">
+                                    {{rc.cart.cartCount}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="top-dropdown-wrapper" ng-blur="rc.showDropdown($event,false)" data-ng-mouseleave="rc.showDropdown($event,false)">
+                            <div class="dropdown-sthanik cart-dropdown">
+                                <div class="cart-model" ng-controller="CartCtrl as cac" ng-include="'common/views/cart-modal.html'"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="nav-btn-wrapper small-search">
+                        <div class="btn btn-default nav-btn small-search" data-ng-mouseenter="rc.showDropdown($event,true)" ng-click="ct.showSmlSearch=!ct.showSmlSearch;rc.showDropdown($event,ct.showSmlSearch)" ng-init="ct.showSmlSearch=false">
+                            <span class="glyphicon glyphicon-search nav-search"></span>
+                        </div>
+                        <div class="top-dropdown-wrapper" data-ng-mouseleave="rc.showDropdown($event,false)">
+                            <div class="dropdown-sthanik small-search-dropdown">
+                                <form class="navbar-form nav-small-search" role="search">
+                                    <div class="input-group add-on">
+                                        <input type="text" class="form-control grocerySearch" placeholder="Keyword" name="srch-term" id="srch-term" ng-model="searchInput">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-default btn-primary" type="submit" ng-click="onItemSearchClick(searchInput);rc.showDropdown($event,false)">Search</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

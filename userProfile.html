@@ -1,0 +1,168 @@
+<div class="sthanik-page user-profile" ng-controller="userProfileCtrl" ng-init='init()'>
+    <div class="container">
+        <div class="row">
+            <div class="board">
+                <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="stepTab btn btn-primary" data-target="#myProfile" data-toggle="tab">
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                            <div class="hidden-xs">My Details</div>
+                        </button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="stepTab btn btn-default" data-target="#address" data-toggle="tab">
+                            <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                            <div class="hidden-xs">Saved Address</div>
+                        </button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="stepTab btn btn-default" data-target="#orderHistory" data-toggle="tab">
+                            <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
+                            <div class="hidden-xs">OrderHistory</div>
+                        </button>
+                    </div>
+                </div>
+                <div class="well">
+                    <div class="tab-content">
+                        <!-- Form place holder -->
+                        <div class="tab-pane fade in active" id="myProfile">
+                            <div class="profile-wrapper" ng-init="profileInit()">
+                                <div class="card hovercard">
+                                    <div class="card-background">
+                                        <img class="card-bkimg" alt="" src="common/images/default-avatar.png">
+                                    </div>
+                                    <div class="useravatar">
+                                        <img alt="" src="common/images/default-avatar.png">
+                                    </div>
+                                    <div class="card-info">
+                                        <span class="card-title">{{userInfo.firstName}} {{userInfo.middleName}} {{userInfo.lastName}}</span>
+                                    </div>
+                                </div>
+                                <div class="profileCard">
+                                    <div class="card-content-wrapper">
+                                        <div class="card-content">
+                                            <div class="wrapper">
+                                                <div class="profile-row">
+                                                    <div class="key">First Name</div>
+                                                    <div class="value">{{userInfo.firstName}}</div>
+                                                </div>
+                                                <div class="profile-row">
+                                                    <div class="key">Middle Name</div>
+                                                    <div class="value">{{userInfo.middleName}}</div>
+                                                </div>
+                                                <div class="profile-row">
+                                                    <div class="key">Last Name</div>
+                                                    <div class="value">{{userInfo.lastName}}</div>
+                                                </div>
+                                                <div class="profile-row">
+                                                    <div class="key">Email</div>
+                                                    <div class="value">{{userInfo.email}}</div>
+                                                </div>
+                                                <div class="profile-row">
+                                                    <div class="key">Mobile</div>
+                                                    <div class="value">{{userInfo.mobile}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="text-center btn-wrap">
+                                            <button type="submit" class="btn btn-primary" ng-click="editInfo()">Update Details</button>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                <div class="form-section profileEdit-card">
+                                    <form name="userForm" novalidate>
+                                        <div class="form-group form-input-group" ng-class="{
+                              'has-error': (userForm.firstName.$dirty || userForm.$submitted) && !userForm.firstName.$valid,
+                              'has-success': (userForm.firstName.$dirty || userForm.$submitted) && userForm.firstName.$valid
+                              }">
+                                            <input type="text" id="firstName" name="firstName" class="form-input-field" ng-model="userProfile.firstName" required>
+                                            <label ng-class="{'filled': userProfile.firstName}" for="firstName" class="control-label">First Name</label>
+                                            <p ng-show="userForm.firstName.$error.required && (userForm.firstName.$dirty || userForm.$submitted)" class="help-block">First Name is required.</p>
+                                        </div>
+
+                                        <div class="form-group form-input-group">
+                                            <input type="text" id="middleName" name="middleName" class="form-input-field" ng-model="userProfile.middleName">
+                                            <label ng-class="{'filled': userProfile.middleName}" for="middleName" class="control-label">Middle Name</label>
+                                            <!-- <p ng-show="userForm.middleName.$error.required && userForm.middleName.$dirty || userForm.$submitted) " class="help-block">Middle Name is required.</p> -->
+                                        </div>
+
+                                        <div class="form-group form-input-group" ng-class="{
+                              'has-error': (userForm.lastName.$dirty || userForm.$submitted) && !userForm.lastName.$valid,
+                              'has-success': (userForm.lastName.$dirty || userForm.$submitted) && userForm.lastName.$valid
+                              }">
+                                            <input type="text" id="lastName" name="lastName" class="form-input-field" ng-model="userProfile.lastName" required>
+                                            <label ng-class="{'filled': userProfile.lastName}" for="lastName" class="control-label">Last Name</label>
+                                            <p ng-show="userForm.lastName.$error.required && (userForm.lastName.$dirty || userForm.$submitted)" class="help-block">Last Name is required.</p>
+                                        </div>
+
+                                        <div class="form-group form-input-group" ng-class="{
+                              'has-error': (userForm.email.$dirty || userForm.$submitted) && (userForm.email.$error.validateEmail || !userForm.email.$valid),
+                              'has-success': (userForm.email.$dirty || userForm.$submitted) && (!userForm.email.$error.validateEmail || userForm.email.$valid)
+                              }">
+                                            <input type="text" id="email" apikey="service" name="email" class="form-input-field" ng-model="userProfile.email" ng-model-options="{ updateOn: 'blur' }" ng-disabled="true">
+                                            <label ng-class="{'filled': userProfile.email}" for="email" class="control-label">Email</label>
+                                            <div ng-show="userForm.email.$dirty || userForm.$submitted" class="help-block">
+                                                <span ng-show="userForm.email.$error.required">Email is required.</span>
+                                                <span ng-show="userForm.email.$error.not_valid_format">Enter valid email id format</span>
+                                                <span ng-show="userForm.email.$error.email_registered_already">Email registered already, Try forgot password</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group form-input-group" ng-class="{
+                              'has-error': (userForm.mobile.$dirty || userForm.$submitted) && (!userForm.mobile.$valid || userForm.mobile.$error.validateMobile),
+                              'has-success': (userForm.mobile.$dirty || userForm.$submitted) && (userForm.mobile.$valid || !userForm.mobile.$error.validateMobile)
+                              }">
+                                            <input type="number" id="mobile" apikey="service" name="mobile" class="form-input-field" ng-model="userProfile.mobile" data-initvalue="{{userInfo.mobile}}" ng-model-options="{ updateOn: 'blur' }" required validate-mobile>
+                                            <label ng-class="{'filled': userProfile.mobile}" for="mobile" class="control-label">Mobile</label>
+                                            <div ng-show="userForm.mobile.$dirty || userForm.$submitted" class="help-block">
+                                                <span ng-show="userForm.mobile.$error.required">Mobile is required.</span>
+                                                <span ng-show="userForm.mobile.$error.not_ten_digits">Enter valid Mobile number</span>
+                                                <span ng-show="userForm.mobile.$error.num_registered">Mobile number registered already</span>
+                                            </div>
+                                            <!-- <pre>myForm.myName.$error = {{ userForm.mobile.$error | json }}</pre> -->
+                                        </div>
+
+                                        <div class="form-group" ng-if="rc.showOTP && !userForm.mobile.$error.validateMobile" ng-class="{
+                              'has-error':!userForm.otp.$valid && (userForm.otp.$dirty || userForm.$submitted),
+                              'has-success':userForm.otp.$valid && (userForm.otp.$dirty || userForm.$submitted)
+                          }">
+                                            <input type="number" id="otp" name="otp" class="form-control" ng-model="userProfile.otp" ng-model-options="{ updateOn: 'blur' }" required validate-otp>
+                                            <label ng-class="{'filled': userProfile.otp}" for="otp" class="control-label">Enter OTP recevied on your mobile:
+                                                <p ng-show="userForm.otp.$error.required && (userForm.otp.$dirty || userForm.$submitted)" class="help-block">OTP is required.</p>
+                                                <p ng-show="userForm.otp.$error.validateOtp" class="help-block">Invalid OTP!! Please try other</p>
+                                            </label>
+                                            <!-- <p ng-show="userForm.otp.$error.required && (userForm.otp.$dirty || userForm.$submitted )" class="help-block">OTP is required.</p> -->
+                                        </div>
+
+                                        <!-- <div class="form-group form-input-group" ng-class="{
+                              'has-error': (userForm.password.$dirty || userForm.$submitted) && !userForm.password.$valid,
+                              'has-success': (userForm.password.$dirty || userForm.$submitted) && userForm.password.$valid
+                              }">
+                                            <input type="password" id="password" name="password" class="form-input-field" ng-model="userProfile.password" required>
+                                            <label ng-class="{'filled': userProfile.password}" for="password" class="control-label">Password</label>
+                                            <p ng-show="userForm.password.$error.required && (userForm.password.$dirty || userForm.$submitted)" class="help-block">Password is required.</p>
+                                        </div> -->
+                                        <div class="pull-right">
+                                            <button ng-click="cancelUpdate()" class="btn btn-default">Cancel</button>
+                                            <button ng-click="updateUserProfile(userProfile,userForm.$valid)" class="btn btn-primary">Update</button>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="tab-pane fade in" style="text-align:center; font-size: 24px" id="address">
+                            Coming Soon....
+                        </div>
+                        <div class="tab-pane fade in" style="text-align:center; font-size: 24px" id="orderHistory">
+                            Coming very very soon....
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

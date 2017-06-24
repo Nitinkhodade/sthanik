@@ -1,0 +1,329 @@
+<div class="orderHistory-wrapper sthanik-page" ng-controller="manageInventoryCtrl" ng-init='init()'>
+    <div class="container">
+        <div class="row">
+			
+            <div class="board">
+			     
+			    <div class="tab-content">
+				<div class="panel panel-default">
+				<!-- Default panel contents -->
+				<div class="panel-heading"  style="height: 25px;padding-top:0px;padding-left:10px">Sthanik Master Inventory</div>
+				<div class="panel-body">
+				 <form class="navbar-form nav-search" role="search">
+					<div class="row">
+							<div class="col-xs-6 col-sm-4">
+									<!--input type="text" class="form-control grocerySearch" placeholder="Select Category" name="srch-term" id="srch-term" ng-model="rc.searchInput"-->
+							   <select ng-model="selectCategory" ng-options="category as category for category in categories" class="form-control input-sm">
+                                    <option value="">Select category</option>
+                               </select>
+							</div>
+							<div class="col-xs-4 col-sm-4">
+							<input type="text" class="form-control input-sm" placeholder="Item name" name="srch-term" id="srch-term" ng-model="searchItemInput">
+							</div>
+							<!--div class="clearfix visible-xs-block">
+							<input type="text" class="form-control grocerySearch" placeholder="Start typing your product name" name="srch-term" id="srch-term" ng-model="rc.searchInput">
+							</div-->
+							<div class="col-xs-4 col-sm-4">
+							<input type="text" class="form-control input-sm" placeholder="Menu" name="srch-term" id="srch-term" ng-model="rc.searchInput">
+							</div>
+					</div>
+					<div class="clearfix"></br></div>
+					<div class="row">
+							<div class="col-xs-4 col-sm-4">
+									<!--input type="text" class="form-control grocerySearch" placeholder="" name="srch-term" id="srch-term" ng-model="rc.searchInput"-->
+							<a href="" type="button" class="btn btn-primary" data-toggle="modal" data-target="#addItemModal" ng-click="addItem()">Add Item</a>
+							</div>
+							<div class="col-xs-4 col-sm-4">
+							<!--input type="text" class="form-control grocerySearch" placeholder="" name="srch-term" id="srch-term" ng-model="rc.searchInput"-->
+							<a href="" ng-click="getCategoryItems()" type="button" class="btn btn-primary">Search</a>
+							</div>
+							<!--div class="clearfix visible-xs-block">
+							<input type="text" class="form-control grocerySearch" placeholder="Start typing your product name" name="srch-term" id="srch-term" ng-model="rc.searchInput">
+							</div-->
+							<div class="col-xs-4 col-sm-4">
+							<!--a href="" ng-click="getCategoryItems()" type="button" class="btn btn-primary">Search</a-->
+							</div>
+					</div>
+					
+				</form>
+				</div>
+			</div>
+				<spinner flag="flagLoading"></spinner>
+					<div class="listview">
+                        <div class="item-list-card" ng-repeat="itemDtls in categoryItems | filter : {itemName :searchItemInput}" >
+                            <div class="thumbnail item-card">
+                                <!--div class="progress">
+                                    
+                                    <div  class="progress-bar progress-bar-{{orderDtls.orderStatus}}"
+                                         title="Status changed at {{orderDtls.orderDate  | date:'dd/MM/yyyy, hh:mm:ss a'}}">
+                                        {{orderDtls.orderStatus}}
+                                    </div>
+                                   
+                                </div-->
+								<!--div>
+                                    <div class="col-xs-2 col-md-2 pull-right">
+                                        <!--a class="toggleItems" ng-click="orderDtls.showItems=!orderDtls.showItems;miCtrl.getOrderItemsData(orderDtls.orderId)">
+                                            <text ng-if="!orderDtls.showItems">Add Option</text>
+                                            <text ng-if="orderDtls.showItems">Hide Item Details</text>
+                                        </a>
+										
+                                    </div>
+                                </div-->
+                                <div class="item-wrapper">
+                                    <div class="col-xs-2 col-md-2">
+                                        <ul class="nav nav-pills nav-stacked">
+                                            <li><img src="http://localhost:8080/common/images/sthanik/7%20UP.jpg" class="img-thumbnail" alt="{{itemDtls.imageUrl}}" width="100" height="100"> </li>
+                                            
+                                        </ul>
+                                    </div>
+									<div class="col-xs-5 col-md-5">
+                                        <ul class="nav nav-pills nav-stacked">
+                                            <li><strong>Item :</strong> {{itemDtls.itemName}}</li>
+                                            <li><strong>Available in stores:</strong> </li>
+                                            <li><strong>Menu: </strong>{{itemDtls.mainMenuCategory}}-> {{itemDtls.subMenuCategory}}</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-xs-5 col-md-5">
+                                        <ul class="nav nav-pills nav-stacked">
+                                            <li><strong>Available in  </strong>  
+											<button type="button" class="btn btn-default  btn-xs" aria-label="Left Align" data-toggle="modal" data-target="#addItemOptionModal" ng-click="addItemOption(itemDtls)">
+													<span class="glyphicon glyphicon-plus" aria-hidden="true" title="click to add new item option"></span>
+											</button>
+											</li>
+                                            <li ng-repeat="itemOption in itemDtls.shopOptions">
+												<strong>Unit :</strong> {{itemOption.optionValue +" "+ itemOption.optionUnit}}
+												<strong>Sprice :</strong> {{itemOption.sprice}}  <strong>Mrp : {{itemOption.mrp}}</strong>
+												<button type="button" class="btn btn-default btn-xs" aria-label="Left Align" data-toggle="modal" data-target="#editItemOptionModal" ng-click="editItemOption(itemOption)">
+													<span class="glyphicon glyphicon-edit" aria-hidden="true" title="click to edit item option"></span>
+												</button>
+											</li>
+                                            
+                                        </ul>
+                                    </div>
+									
+                                </div>
+                                
+                                
+                                 
+								<div class="clearfix"></div>
+                               <!--
+                                <div class="orderDetails" ng-if="orderDtls.showItems">
+                                    <form>
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Item Name</th>
+                                                    <th>Price</th>
+                                                    <th>Unit</th>
+                                                    <th>Quantity</th>
+                                                    <th>Total Price</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr alt="Please click here to see more" ng-repeat="orderItem in orderItems">
+                                                    <td>{{orderItem.itemName}}</td>
+                                                    <td>{{orderItem.itemPrice}}</td>
+                                                    <td>{{orderItem.itemUnit}}</td>
+                                                    <td>{{orderItem.itemQuantity}}</td>
+                                                    <td>{{orderItem.itemTotalPrice}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>Total Order</td>
+                                                    <td>Rs. {{orderDtls.orderTotal}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>Delivery Charges</td>
+                                                    <td>{{orderDtls.deliveryCharges}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>Discount</td>
+                                                    <td>{{orderDtls.discount}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td><strong>Amount Paid</strong></td>
+                                                    <td><strong>Rs. {{orderDtls.grandTotal}}</strong></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </form>
+                                </div> 
+                                --> 
+                            </div>
+                        
+                        </div>
+                    </div>
+				</div>	
+                
+            </div>
+        </div>
+    </div>
+	<!-- Edit Item Modal -->
+  <div class="modal fade" id="editItemOptionModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		  
+          <h4 class="modal-title">Item Option</h4>
+        </div>
+		<form name="myForm">
+        <div class="modal-body">
+          
+			<div class="form-group row">
+				<div class="col-xs-4">
+				<label for="ex1">Unit</label>
+				<input class="form-control" id="ex1" name="ex1" type="text" ng-model="itemoption.optionValue + itemoption.optionUnit" required>
+				<span ng-show="myForm.ex1.$touched && myForm.ex1.$invalid">Unit is required.</span>
+				</div>
+				<div class="col-xs-4">
+				<label for="ex2">MRP</label>
+				<input class="form-control" id="ex2" name="ex2" type="text" ng-model="itemoption.mrp" required>
+				<span ng-show="myForm.ex2.$touched && myForm.ex2.$invalid">MRP is required.</span>
+				</div>
+				<div class="col-xs-4">
+				<label for="ex3">Sprice</label>
+				<input class="form-control" id="ex3" name="ex3" type="text" ng-model="itemoption.sprice" required>
+				<span ng-show="myForm.ex3.$touched && myForm.ex3.$invalid">Sprice is required.</span>
+				</div>
+			</div>
+		  
+		  <div class="alert alert-success" ng-show="showSuccessAlert">
+			<p>{{statusText}}</p>
+		  </div>
+		   
+        </div>
+        <div class="modal-footer">
+		  
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		  <button type="button" class="btn btn-default" ng-click="saveItemOption()" ng-disabled="myForm.$invalid">Save</button>
+        </div>
+		</form>
+      </div>
+      
+    </div>
+  </div>
+  	<!-- Add Item Option Modal -->
+  <div class="modal fade" id="addItemOptionModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		  
+          <h4 class="modal-title">Item Option</h4>
+        </div>
+		<form name="addOptionForm">
+        <div class="modal-body">
+          
+			<div class="form-group row">
+				<div class="col-xs-3">
+				<label for="ex0">Option Value</label>
+				<input class="form-control" id="ex0" name="ex0" type="text" ng-model="newItemOption.optionValue" required>
+				<span ng-show="addOptionForm.ex0.$touched && addOptionForm.ex0.$invalid">Option value is required.</span>
+				</div>
+				<div class="col-xs-3">
+				<label for="ex1">Option Unit</label>
+				<input class="form-control" id="ex1" name="ex1" type="text" ng-model="newItemOption.optionUnit" required>
+				<span ng-show="addOptionForm.ex1.$touched && addOptionForm.ex1.$invalid">Option unit is required.</span>
+				</div>
+				<div class="col-xs-3">
+				<label for="ex2">MRP</label>
+				<input class="form-control" id="ex2" name="ex2" type="text" ng-model="newItemOption.mrp" required>
+				<span ng-show="addOptionForm.ex2.$touched && addOptionForm.ex2.$invalid">MRP is required.</span>
+				</div>
+				<div class="col-xs-3">
+				<label for="ex3">Sprice</label>
+				<input class="form-control" id="ex3" name="ex3" type="text" ng-model="newItemOption.sprice" required>
+				<span ng-show="addOptionForm.ex3.$touched && addOptionForm.ex3.$invalid">Sprice is required.</span>
+				</div>
+			</div>
+		  
+		  <div class="alert alert-success" ng-show="showSuccessAlert">
+			<p>{{statusText}}</p>
+		  </div>
+		   
+        </div>
+        <div class="modal-footer">
+		  
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		  <button type="button" class="btn btn-default" ng-click="createItemOption()" ng-disabled="addOptionForm.$invalid">Save</button>
+        </div>
+		</form>
+      </div>
+      
+    </div>
+  </div>
+ 	<!-- Add Item Modal -->
+  <div class="modal fade" id="addItemModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		  
+          <h4 class="modal-title">Item</h4>
+        </div>
+		<form name="addItemForm" class="form-horizontal">
+        <div class="modal-body">
+			 <div class="form-group" ng-class="{'has-error': addItemForm.ex0.$touched && addItemForm.ex0.$invalid}">
+				<label class="col-xs-2 control-label" for="ex0">Item Name</label>
+				<div class="col-xs-10">
+					<input type="text" id="ex0" name="ex0" class="form-control" placeholder="Item Name" ng-model="newItem.itemName" required>
+					<span ng-show="addItemForm.ex0.$touched && addItemForm.ex0.$invalid" class="help-block">Item Name is required.</span>
+				</div>
+			</div>
+			<div class="form-group" ng-class="{'has-error': addItemForm.ex1.$touched && addItemForm.ex1.$invalid}">
+				<label class="col-xs-2 control-label" for="ex1">Description</label>
+				<div class="col-xs-10">
+					<input type="text" id="ex1" name="ex1" class="form-control" placeholder="Description" ng-model="newItem.description" required>
+					<span ng-show="addItemForm.ex1.$touched && addItemForm.ex1.$invalid" class="help-block">Description is required.</span> 
+				</div>
+			</div>
+			<div class="form-group" ng-class="{'has-error': addItemForm.ex2.$touched && addItemForm.ex2.$invalid}">
+				<label class="col-xs-2 control-label" for="ex2">Menu</label>
+				<div class="col-xs-10">
+					<input type="text" id="ex2" name="ex2" class="form-control" placeholder="Menu" ng-model="newItem.subMenuId" required>
+					<span ng-show="addItemForm.ex2.$touched && addItemForm.ex2.$invalid" class="help-block">Menu is required.</span> 
+				</div>
+			</div>
+			
+			<div class="form-group" ng-class="{'has-error': addItemForm.ex3.$touched && addItemForm.ex3.$invalid}">
+				<label class="col-xs-2 control-label" for="ex3">Image URL</label>
+				<div class="col-xs-10">
+					<input type="text" id="ex3" name="ex3" class="form-control" placeholder="Image URL" ng-model="newItem.imageUrl" required>
+					<span ng-show="addItemForm.ex3.$touched && addItemForm.ex3.$invalid" class="help-block">Image URL is required.</span>
+				</div>
+			</div>
+		<div class="alert alert-success" ng-show="showSuccessAlert">
+			<p>{{statusText}}</p>
+		  </div>
+		   
+        </div>
+        <div class="modal-footer">
+		  
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		  <button type="button" class="btn btn-default" ng-click="createItem()" ng-disabled="addItemForm.$invalid">Save</button>
+        </div>
+		</form>
+      </div>
+      
+    </div>
+  </div>
+  </div>
+

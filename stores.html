@@ -1,0 +1,60 @@
+<div class="stores" ng-init="init()">
+    <div class="store-banner">
+        <div class="store-banner-img">
+            <img class="store-bkimg" alt="" src="common/images/store_inside.jpg">
+            <div class="background-overly"></div>
+        </div>
+        <div class="stores-details" ng-if="!storesLoading">
+            <div class="store-msg">
+                <div ng-if="store_results.length !== 0">
+                    Awesome! We have <span class="count">{{store_results.length}}</span> stores near to you
+                </div>
+                <div ng-if="store_results.length === 0">
+                    Ooopss!!! No Store is active right now.
+                </div>
+            </div>
+            <div class="area-chosen">
+                <span class="glyphicon glyphicon-map-marker"></span>
+                <span>{{selectedArea.locationName}}, {{selectedArea.areaName}}, {{cityName}}</span>
+            </div>
+            <div class="filterStores">
+                <input type="text" ng-model="stc.storeQuery" class="storeQuery" placeholder="Filter Stores by Name">
+                <span class="glyphicon glyphicon-search"></span>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="thumbnail store-card" ng-click="stc.setCurrentStore(store)" ng-repeat="store in stores | filter:{name:stc.storeQuery} as store_results">
+            <div class="card-img">
+                <img ng-src="{{store.imageUrl}}" alt="{{store.imageUrl}}">
+            </div>
+            <div class="card-content">
+                <div class="store-name">
+                    <span class="card-title">
+                    {{store.name}}
+                    </span>
+                    <span> ({{store.category}})</span>
+                    <favorite-store rc="rc" store="store" extracls="'store-star'"></favorite-store>
+                </div>
+
+                <div class="openTimings">
+                    <span class="glyphicon glyphicon-map-marker"></span> {{store.address.addressLine1}} {{store.address.addressLine2}}
+                </div>
+                <div class="openTimings">
+                    <span class="glyphicon glyphicon-time"></span> {{store.timings}}
+                </div>
+                <div class="contactNo">
+                    <span class="glyphicon glyphicon-earphone"></span> {{store.contactNo}}
+                </div>
+                <div ng-if="store.timings" class="deliveryMsg">
+                    <span class="glyphicon glyphicon-tag"></span>{{store.freeDeliveryMessage}} ({{store.stdDeliveryTime}})
+                </div>
+                <img ng-if="store.sodexoAllowed === 'Y'" class="sodexo_icon" src="/common/images/sodexo_icon.png">
+            </div>
+            <div class="card-menu-right glyphicon glyphicon-menu-right"></div>
+        </div>
+        <spinner flag="storesLoading"></spinner>
+    </div>
+    <!--h1> This is a new Page for stores</h1>
+ <a href="/shop" ng-repeat=" store in stores"><h2>{{store.name}}</h2></a-->
+</div>

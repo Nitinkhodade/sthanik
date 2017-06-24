@@ -1,0 +1,72 @@
+<div class="orderHistory-wrapper" ng-controller="shopItemExportImportCtrl" ng-init='init()'>
+    <div class="container">
+        
+        <div class="row">
+            <div class="board">
+                <div class="board-inner-head">
+                    <div class="title">
+                        <label>Export-Import Shop Items</label>
+                    </div>
+                </div>
+                <div class="tab-content">
+                    <table class="table table-striped">
+                        <thead>
+                        </thead>
+                        <tbody>
+                            <tr class="order_row">
+                                <td><input type="file" file-model="myFile"/></td>
+								<td> <button ng-click="uploadFile()"  class="btn btn-primary">Upload Items</button>&nbsp;<button class="btn btn-primary" ng-click="downloadShopItem('shop.csv')">Export Items</button></td>
+								<td><button class="btn btn-primary" ng-click="importData()">Import Now</button></td>
+                                <td></td>
+                                <td> </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Unit</th>
+                                <th>MRP</th>
+                                <th>Sprice</th>
+                                <th>Discount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="order_row" ng-if="importResult.shopItems.length === 0">
+                                
+                                <td>No difference found</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                               
+                            </tr>
+                            <tr class="order_row" title="Click for order item details" ng-repeat="shopItem in importResult.shopItems"  ng-init="$last && setTooltip()">
+                                
+                                <td>{{shopItem.itemName}}--{{shopItem.itemId}}</td>
+                                <td>Unit{{shopItem.unitValue}}</td>
+                                <td>Old MRP:{{shopItem.mrp}} New MRP: {{shopItem.newMrp}}</td>
+                                <td>Old Sprice:{{shopItem.sprice}} New Sprice: {{shopItem.newSprice}}</td>
+                                <td>Old MRP:{{shopItem.disocunt}} New MRP: {{shopItem.newDiscount}}</td>
+                               
+                            </tr>
+                        </tbody>
+                    </table>
+                    <ul class="list-inline text-center btn-wrapper">
+                        <li>
+                            <a href="" ng-click="importData()" type="button" class="btn btn-primary">Import Now</a>
+                            <a href="/shop/s/" type="button" class="btn btn-primary">Go for Shopping</a>
+                        </li>
+                        <!--li>
+                           <input type="file" file-model="myFile"/>
+    					   <button ng-click="uploadFile()">upload me</button>
+    					   <button ng-click="downloadShopItem('shop.csv')">Export</button>
+                        </li-->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

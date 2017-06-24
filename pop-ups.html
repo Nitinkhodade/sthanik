@@ -1,0 +1,188 @@
+<!-- User Login Popup -->
+<div class="modal fade" id="signInModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="signInModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="signInModalLabel">Sign In</h4>
+            </div>
+            <div class="signin-model modal-body" ng-controller="loginCtrl" ng-include="'common/views/login-modal.html'"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Vendor Login popup -->
+<div class="modal fade" id="signInVendorModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="signInVendorModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="signInVendorModalLabel">Vendor Sign In</h4>
+            </div>
+            <div class="signin-model modal-body" ng-controller="loginCtrl"  ng-include="'common/views/vendor-login-model.html'"></div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="splOptionItemModel" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="offersModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body" >
+                placeholder for combo option
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="viewAdjustmentModel" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="viewAdjustmentModelLabel">
+    <div class="modal-dialog" role="document">
+    	<div class="modal-content" >
+   
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="viewAdjustmentModelLabel">Manual Adjustment Details</h4>
+            </div>
+    
+	        <div class="modal-body" ng-repeat="adjustmentDetail in rc.adjustmentDetails.data">
+                <div class="form-group form-input-group">
+                    <label for="orderId" class="control-label"> Order Id: </label> {{adjustmentDetail.orderId}}
+                </div>
+                <div class="form-group form-input-group">
+                    <label for="adjustmentAmount" class="control-label"> Adjustment Amount: </label> {{adjustmentDetail.amount}}
+                </div>
+                <div class="form-group form-input-group">
+                    <label for="approvalStatus" class="control-label"> Approval Status: </label> {{adjustmentDetail.approved}}
+                    <a href="#" ng-if="adjustmentDetail.approved != 'Y' && rc.isSuperAdmin()" ng-controller="createPayoutCtrl" ng-click="updateAdjustment(adjustmentDetail)" title="Approve this adjustment">Approve</a>
+                </div>
+			</div>
+        </div>
+	</div>
+</div>
+
+<!-- Offers promotions popup -->
+<div class="modal fade" id="offerModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="offersModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content offer-popup">
+            <div class="modal-body" >
+                <div class="close" data-dismiss="modal" style="opacity: 1;">x</div>
+                <div class="offer-header header-ribbon"><span>Welcome Offer</span></div>
+                <div class="offer-body">
+                    <div class="offer-message">
+                        <div>{{rc.offer.condition}}</div>
+                    </div>
+                    <div class="offer-value">
+                        <div class="value">Rs.{{rc.offer.discountValue}}</div>
+                        <div class="processType">{{rc.offer.processType}}</div>
+                        <div class="minOrder">*on Rs.{{rc.offer.minOrderValue}}</div>
+                    </div>
+                    <div class="message">
+                        *{{rc.offer.message}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Terms and Conditions popup  -->
+<div class="modal fade" id="termsAndCondModel" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="">Terms and Conditions</h4>
+            </div>
+            <div class="modal-body" ng-include="'common/views/termsAndConditions.html'"></div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Addition starts here for signUP popup -->
+<div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="signUpModalLabel" ng-controller="signUpCtrl">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="signUpModalLabel">Sign Up</h4>
+            </div>
+			
+                 <div class="panel-body">
+                    <form id="signupForm1" method="post" class="form-horizontal" action="">
+
+                         <div class="form-group">
+                             <label class="col-sm-4 control-label" for="firstname1">First name</label>
+                                 <div class="col-sm-8">
+                                     <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                         <input type="text" class="form-control" id="firstname1" name="firstname1" placeholder="First name"/>
+                                     </div>
+                                 </div>
+                         </div>
+
+                          <div class="form-group">
+                              <label class="col-sm-4 control-label" for="middlename1">Middle name</label>
+                                 <div class="col-sm-8">
+                                     <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                         <input type="text" class="form-control" id="middlename1" name="middlename1" placeholder="Middle name"/>
+                                     </div>
+                                 </div>
+                          </div>
+
+                          <div class="form-group">
+                              <label class="col-sm-4 control-label" for="middlename1">Last Name</label>
+                                 <div class="col-sm-8">
+                                     <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                         <input type="text" class="form-control" id="last name1" name="lastname1" placeholder="Last name"/>
+                                     </div>
+                                 </div>
+                          </div>
+
+                          <div class="form-group">
+                              <label class="col-sm-4 control-label" for="email1">Email</label>
+                                 <div class="col-sm-8">
+                                     <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                         <input type="text" class="form-control" id="email1" name="email1" placeholder="Email"/>
+                                     </div>
+                                 </div>
+                          </div>
+
+                          <div class="form-group">
+                              <label class="col-sm-4 control-label" for="password1">Password</label>
+                                 <div class="col-sm-8">
+                                     <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                         <input type="password" class="form-control" id="password1" name="password1" placeholder="Password"/>
+                                     </div>
+                                 </div>
+                          </div>
+
+                          <div class="form-group">
+                              <label class="col-sm-4 control-label" for="confirm_password1">Confirm password</label>
+                                 <div class="col-sm-8">
+                                     <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                         <input type="password" class="form-control" id="confirm_password1" name="confirm_password1" placeholder="Confirm password"/>
+                                     </div>
+                                 </div>
+                          </div>
+
+                          <div class="form-group">
+                              <div class="col-sm-6 col-sm-offset-4">
+                                   <div class="checkbox">
+                           <label>
+                                 <input type="checkbox" id="agree1" name="agree1" value="agree"/>Please agree to our policy
+                           </label>
+                                   </div>
+                              </div>
+                          </div>
+						  
+                          <div class="form-group">
+                              <div class="col-sm-9 col-sm-offset-4">
+                                   <button type="submit" class="btn btn-primary" name="signup1" value="Sign up">Sign up</button>
+                              </div>
+                         </div>
+                    </form>
+                </div>
+        </div>
+    </div>
+</div>
+
+<!-- Addition ends here for signUP popup   -->

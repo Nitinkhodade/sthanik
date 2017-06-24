@@ -1,0 +1,108 @@
+<div class="container-fluid" ng-init="init()">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="row">
+                <form class="address-review">
+                    <div class="form-group text-center summary-label">
+                        <label>
+                            <h3>Shop-{{getStore().name}}</h3></label>
+                    </div>
+                    <div class="form-group summary-content">
+                        <div> <img ng-src="{{getStore().imageUrl}}" alt="{{getStore().imageUrl}}" style="width: 200px; height:100px;"></div>
+                        <div>Contact us: {{getStore().contactNo}}</div>
+                    </div>
+                </form>
+                <form class="address-review">
+                    <div class="form-group text-center summary-label">
+                        <label>
+                            <h3>Shipping Address</h3></label>
+                    </div>
+                    <div class="form-group summary-content">
+                        <div>{{cc.existingAddress.addressLine1}}</div>
+                        <div>{{cc.existingAddress.addressLine2}}</div>
+                        <div>{{cc.existingAddress.city}}</div>
+                        <div>{{cc.existingAddress.state}}</div>
+                        <div>{{cc.existingAddress.pinCode}}</div>
+                        <div>{{cc.existingAddress.country}}</div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <form class="items-review">
+                <div class="form-group text-center summary-label">
+                    <label>
+                        <h3>Item's to Deliver</h3>
+                    </label>
+                </div>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th class="">Product</th>
+                            <th class="text-center">Price/Unit</th>
+                            <th class="text-center">Quantity</th>
+                            <th class="text-center">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="cartItem in getCart() track by cartItem.itemId">
+                            <td><strong>{{cartItem.productName}} </strong></td>
+                            <td class="text-center align-middle">{{cartItem.price}}/{{cartItem.availIn}}</td>
+                            <td class="text-center align-middle">{{cartItem.quantity}}</td>
+                            <td class="text-center align-middle">Rs.{{cartItem.quantity*cartItem.price}}</td>
+                        </tr>
+                        <tr>
+                            <td/>
+                            <td/>
+                            <td class="text-center align-middle"><strong>Total</strong></td>
+                            <td class="text-center align-middle"><strong>Rs.{{rc.cart.totalAmount}}</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="form-group customerRemarks">
+                    <textarea cols="40" rows="5" ng-model="rc.customerRemarks" name="customerRemarks" placeholder="Have something to say to Shopkeeper?"></textarea>
+                </div>
+                <div class="amount-wrapper">
+
+                    <div class="amount-row">
+                        Order Total :
+                        <span class="row-value"> Rs.{{rc.cart.totalAmount}} </span>
+                    </div>
+                    <div class="form-group amount-row">
+                        Payment Mode :
+                        <input type="radio" ng-model="rc.payMode" ng-change="savePayMode()" name="payMode" value="COD"> Cash On Delivery
+                        <input type="radio" ng-model="rc.payMode" ng-change="savePayMode()" name="payMode" value="PAY_NOW"> Pay Online
+                    </div>
+                    <div class="amount-row">
+                        Shipping Charges:
+                        <span class="row-value">Rs.{{rc.cart.deliveryCharges}}</span>
+                        <span class="glyphicon glyphicon-info-sign" title="This fees is incurred by Shopkeeper to deliver your order items."></span>
+
+                    </div>
+                    <div class="amount-row">
+                        Transaction Charges:
+                        <span class="row-value">Rs.{{rc.cart.transactionCharges}}</span>
+                        <span class="glyphicon glyphicon-info-sign" title="This fees is incurred by the Payment Gateway Provider to facilitate online payments"></span>
+                    </div>
+                    <div ng-if="rc.cart.isValidCouponApplied" class="amount-row">
+                        Coupon Discount:
+                        <span class="row-value">-Rs.{{rc.cart.discountValue}}</span>
+                    </div>
+
+                    <div class="totalAmount amount-row">
+                        Total Amount Payable :
+                        <span class="row-value">Rs.{{rc.cart.totalAmount + rc.cart.deliveryCharges - rc.cart.discountValue + rc.cart.transactionCharges}}</span>
+                    </div>
+                    <div class="amount-row">
+                        <input type="checkbox" ng-model="rc.agree" name="agree" /> I agree to the <a data-toggle="modal" data-target="#termsAndCondModel">terms & conditions</a>
+                    </div>
+                </div>
+                <div class="form-group customerRemarks">
+                    <strong>{{getStore().freeDeliveryMessage}}</strong>
+                </div>
+                <div class="clearfix"></div>
+            </form>
+        </div>
+    </div>
+</div>

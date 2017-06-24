@@ -1,0 +1,82 @@
+<div class="landing-wrapper"  ng-init="lc.init()">
+    <div class="container-fluid intro-header" style="background-image:url(./common/images/home-banner.jpg)">
+        <div class="background-overly"></div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="intro-message">
+                    <h2 class="intro-title">Shop online from apni store!</h2>
+                    <h3 class="intro-tip">Easily order items from your nearest store!!</h3>
+                    <div class="searchBoxWrapper">
+                        <div class='col-sm-1 col-md-2'></div>
+                        <div class="input-group setlocation col-sm-10 col-md-8">
+                            <div class="input-group-btn landing_dropdown for-mobile" data-ng-mouseenter="loc.showCity = true" data-ng-mouseleave="loc.showCity = false" ng-init="loc.showCity = false">
+                                <button type="button" class="btn city-btn dropdown-toggle" id="cityDropDown" data-toggle="dropdown">
+                                    <span class="pull-left glyphicon glyphicon-home"></span>
+                                    <span class="pull-right glyphicon glyphicon-menu-down"></span>
+                                    <span class="city-sel selected-city">{{loc.citySelected}}</span>
+                                </button>
+                                <ul class="dropdown-menu landing_menu" ng-show="loc.showCity" id="city-menu">
+                                    <li data-ng-repeat="location in loc.locationList"><a href="" class="city-list" data-ng-click="lc.setCurrentCity('{{location}}')">{{location}}</a></li>
+                                    <li ng-if="lc.citysLoading" style="text-align: center;"><img src="./common/images/spinner.gif"></li>
+                                </ul>
+                            </div>
+                            <div class="area-search for-mobile" ng-class="{'no-selection': !lc.hasSelection()}">
+                                <input type="text" data-ng-model="lc.query" class="form-control searchAreaBar" placeholder="Search by area..." data-ng-change="lc.toggleGuess();">
+                                <div class="wrapper">
+                                    <ul class="dropdown-menu area-codes" ng-init="lc.noareas=true">
+                                        <li ng-if="lc.noareas"><strong style=" padding-left: 20px; ">No Areas covered in this City</strong></li>
+                                        <li data-ng-repeat="area in loc.areaList[0].areas | filter:lc.query as results" on-finish-render="areaCodesRendered"><a href="" class="area-list" data-ng-click="lc.setCurrentArea(area)" val='{{area.locationName}},{{area.areaName}}'>{{area.locationName}},{{area.areaName}}</a></li>
+                                        <li ng-if="results.length == 0"><strong style=" padding-left: 20px; ">Yet to reach there...</strong></li>
+                                        <li ng-if="lc.areasLoading" style="text-align: center;"><img src="./common/images/spinner.gif"></li>
+                                    </ul>
+                                </div>
+                                <span ng-if="lc.query!==''" ng-click="lc.removeAreaSelection()" class="removeArea">x</span>
+                            </div>
+                            <!--
+                            <div class="input-group-btn landing_dropdown for-mobile" ng-init="loc.showCategory = false; lc.disableCategory=true" data-ng-mouseenter="loc.showCategory = true" data-ng-mouseleave="loc.showCategory = false" ng-disabled="lc.disableCategory">
+                                <button type="button" class="btn category-btn dropdown-toggle" id="categoryDropDown" data-toggle="dropdown" ng-disabled="lc.disableCategory">
+                                    <span class="pull-left glyphicon glyphicon-grain"></span>
+                                    <span class="pull-right glyphicon glyphicon-menu-down"></span>
+                                    <span class="city-sel selected-city">{{loc.categorySelected}}</span>
+                                </button>
+                                <ul class="dropdown-menu landing_menu" id="" ng-show = "!lc.disableCategory && loc.showCategory">
+                                    <li data-ng-repeat="category in loc.categoryList"><a href="" id="{{category.id}}" data-ng-click="lc.setCategory({{category.id}}, '{{category.name}}')">{{category.name}}</a></li>
+                                </ul>
+                            </div>-->
+                            <div class="input-group-btn for-mobile">
+                                <button class="btn btn-default category-btn browseGrosery" data-ng-click="lc.browseGrosery('','all')" type="button" ng-disabled="!lc.hasSelection()">Browse Nearby Stores</button>
+                            </div>
+                        </div>
+                        <div class='col-sm-1 col-md-2'></div>
+                    </div>
+                    <div class="scroll-jumper animated infinite slideInUp hide">
+                        <span class="glyphicon glyphicon-chevron-down"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="siteFlow">
+        <div class="stepsTitle">Get your items, in just 4 simple steps! &#9786;</div>
+        <div class="step 1 col-xs-6 col-sm-3">
+            <img src="./common/images/siteFlow/store.png" class="stepImg tada animated" alt=""/>
+            <div class="stepName">1. Select Store</div>
+            <div class="stepMsg">Choose store nearby</div>
+        </div>
+        <div class="step 2 col-xs-6 col-sm-3">
+            <img src="./common/images/siteFlow/cart.png" class="stepImg swing animated" alt=""/>
+            <div class="stepName">2. Add Items</div>
+            <div class="stepMsg">Select items you need</div>
+        </div>
+        <div class="step 3 col-xs-6 col-sm-3">
+            <img src="./common/images/siteFlow/checkout.png" class="stepImg tada animated" alt=""/>
+            <div class="stepName">3. Checkout</div>
+            <div class="stepMsg">Review & Confirm Order</div>
+        </div>
+        <div class="step 4 col-xs-6 col-sm-3">
+            <img src="./common/images/siteFlow/shipping.png" class="stepImg swing animated" alt=""/>
+            <div class="stepName">4. Delivery</div>
+            <div class="stepMsg">Relax!, items reach you door steps</div>
+        </div>
+    </div>
+</div>

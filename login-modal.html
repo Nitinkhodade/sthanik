@@ -1,0 +1,56 @@
+<div class="modal-body">
+    <!-- Add your username and password code here -->
+    <div class="row login-block">
+        <div class="form-section col-md-12">
+            <form name="loginForm" ng-submit="getUserLoggedIn(credentials,loginForm.$valid)" ng-init="changeFlagToTrue(false)"novalidate="novalidate">
+                <p ng-show="loginFailure" class="error loginFailure">{{failureMsg}}</p>
+                <div class="form-group form-input-group" ng-class="{
+                  'has-error':(loginForm.username.$dirty || loginForm.$submitted) && !loginForm.username.$valid,
+                  'has-success':(loginForm.username.$dirty || loginForm.$submitted) && loginForm.username.$valid
+                  }">
+                    <input id="username" name="username" required="required" ng-model="credentials.username" type="text" class="form-input-field" />
+                    <label for="username" class="control-label">Mobile or Email</label>
+                    <p ng-show="loginForm.username.$error.required && (loginForm.username.$dirty || loginForm.$submitted )" class="help-block">Username is required.</p>
+                </div>
+                <div class="form-group form-input-group" ng-class="{
+                  'has-error': (loginForm.password.$dirty || loginForm.$submitted) && !loginForm.password.$valid,
+                  'has-success':(loginForm.password.$dirty || loginForm.$submitted) && loginForm.password.$valid
+                  }">
+                    <input id="password" name="password" required="required" ng-model="credentials.password" type="password" class="form-input-field" />
+                    <label for="password" class="control-label">Password</label>
+                    <p ng-show="loginForm.password.$error.required && (loginForm.password.$dirty || loginForm.$submitted )" class="help-block">Password is required.</p>
+                </div>
+                <div class="forgot-password" ng-click="showForgetPassword()">
+                    <a href="">Recover my Password</a>
+                </div>
+                <div class="form-group pull-right">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row forgotPassword-block">
+        <div class="form-section col-md-12">
+            <form class="" ng-init="changeFlagToTrue(false)">
+                <div class="form-group form-input-group">
+                    <input id="username" ng-model="credentials.userName" type="text" class="form-input-field" />
+                    <label for="username" class="control-label">Registered Email</label>
+                </div>
+                <div class="form-group pull-right">
+                    <button type="back" class="btn btn-primary" ng-click="backToLogin()">Back</button>
+                    <button type="submit" class="btn btn-primary" ng-click="validateUsername(credentials)">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <label>
+        <div> Not part of our Family yet!! its simple just
+            <a href="" data-dismiss="modal" data-toggle="modal" data-target="#signUpModal">Join Us</a>
+        </div>
+    </label>
+</div>
+<div ng-if="loginLoader" class="loginSpinner spinnerWrapper" ng-init="loginLoader=false">
+    <img src="./common/images/spinner.gif">
+</div>
